@@ -14,21 +14,21 @@ class User(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long,
 
-    @NotNull
+    @field:NotNull
     @Column(unique = true)
-    @Size(max = 20)
+    @field:Size(max = 20)
     var userId: String,
 
-    @NotNull
+    @field:NotNull
     @Column(unique = true)
-    @Size(max = 20)
+    @field:Size(max = 20)
     var nickname: String,
 
-    @NotNull
-    @Size(max = 60)
+    @field:NotNull
+    @field:Size(max = 60)
     var password: String,
 
-    @NotNull
-    @Size(max = 100)
+    @field:NotNull
+    @field:Size(max = 100)
     var profileImageUrl: String
 )
