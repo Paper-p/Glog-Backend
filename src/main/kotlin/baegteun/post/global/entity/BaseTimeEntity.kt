@@ -6,11 +6,13 @@ import java.time.LocalDateTime
 import javax.persistence.Column
 import javax.persistence.EntityListeners
 import javax.persistence.MappedSuperclass
+import javax.validation.constraints.NotNull
 
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener::class)
 abstract class BaseTimeEntity {
     @CreatedDate
-    @Column(nullable = false, updatable = false)
+    @NotNull
+    @Column(updatable = false)
     val createdAt: LocalDateTime = LocalDateTime.now()
 }
