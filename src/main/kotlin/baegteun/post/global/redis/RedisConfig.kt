@@ -21,8 +21,8 @@ class RedisConfig(
         LettuceConnectionFactory(redisProperties.host, redisProperties.port)
 
     @Bean
-    fun redisTemplate(): RedisTemplate<String, Object> {
-        val redisTemplate = RedisTemplate<String, Object>()
+    fun redisTemplate(): RedisTemplate<String, Any> {
+        val redisTemplate = RedisTemplate<String, Any>()
         redisTemplate.setConnectionFactory(redisConnectionFactory())
         redisTemplate.valueSerializer = GenericJackson2JsonRedisSerializer()
         redisTemplate.keySerializer = RedisSerializer.string()
@@ -31,5 +31,5 @@ class RedisConfig(
     }
 
     @Bean
-    fun zSetOperation(): ZSetOperations<String, Object> = redisTemplate().opsForZSet()
+    fun zSetOperation(): ZSetOperations<String, Any> = redisTemplate().opsForZSet()
 }
