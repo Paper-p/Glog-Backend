@@ -8,11 +8,11 @@ import org.springframework.transaction.annotation.Transactional
 
 @Transactional(readOnly = true)
 @Service
-class CheckUserIdExistService(
+class CheckNicknameExistService(
     private val userUtil: UserUtil
 ) {
-    fun execute(userId: String): ResponseEntity<Void> {
-        userUtil.checkExistsUserId(userId)
+    fun execute(nickname: String): ResponseEntity<Void> {
+        userUtil.checkExistsNickname(nickname)
         return ResponseEntity(HttpStatus.OK)
     }
 }

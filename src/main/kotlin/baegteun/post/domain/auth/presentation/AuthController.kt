@@ -3,6 +3,7 @@ package baegteun.post.domain.auth.presentation
 import baegteun.post.domain.auth.presentation.dto.request.SigninRequestDto
 import baegteun.post.domain.auth.presentation.dto.request.SignupRequestDto
 import baegteun.post.domain.auth.presentation.dto.response.SigninResponseDto
+import baegteun.post.domain.auth.services.CheckNicknameExistService
 import baegteun.post.domain.auth.services.CheckUserIdExistService
 import baegteun.post.domain.auth.services.SigninService
 import baegteun.post.domain.auth.services.SignupService
@@ -20,7 +21,8 @@ import javax.validation.Valid
 class AuthController(
     private val signupService: SignupService,
     private val signinService: SigninService,
-    private val checkUserIdExistService: CheckUserIdExistService
+    private val checkUserIdExistService: CheckUserIdExistService,
+    private val checkNicknameExistService: CheckNicknameExistService
 ) {
     @PostMapping("signup")
     fun signup(@RequestBody @Valid signupRequestDto: SignupRequestDto): ResponseEntity<Void> =
@@ -31,6 +33,10 @@ class AuthController(
         signinService.execute(signinRequestDto)
 
     @RequestMapping(name = "valid-id", method = [RequestMethod.HEAD])
-    fun checkValidId(@RequestParam userId: String): ResponseEntity<Void> =
+    fun checkUseridExist(@RequestParam userId: String): ResponseEntity<Void> =
         checkUserIdExistService.execute(userId)
+
+    @RequestMapping(name = "valid-name", method = [RequestMethod.HEAD])
+    fun checkNicknameExist(@RequestParam nickname: String): ResponseEntity<Void> =
+        checkNicknameExistService.execute(nickname)
 }
