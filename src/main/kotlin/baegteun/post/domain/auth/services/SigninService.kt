@@ -1,5 +1,6 @@
 package baegteun.post.domain.auth.services
 
+import baegteun.post.domain.auth.domain.entity.RefreshToken
 import baegteun.post.domain.auth.domain.repository.RefreshTokenRepository
 import baegteun.post.domain.auth.exception.PasswordMismatchException
 import baegteun.post.domain.auth.presentation.dto.request.SigninRequestDto
@@ -19,7 +20,6 @@ class SigninService(
     private val userUtil: UserUtil,
     private val passwordEncoder: PasswordEncoder,
     private val refreshTokenRepository: RefreshTokenRepository,
-    private val userRepository: UserRepository,
     private val jwtTokenProvider: JwtTokenProvider
 ) {
     fun execute(signinRequestDto: SigninRequestDto): ResponseEntity<SigninResponseDto> {
@@ -32,11 +32,19 @@ class SigninService(
         val refresh = jwtTokenProvider.generateRefreshToken(signinRequestDto.userId)
         val expiredAt = jwtTokenProvider.getExpiredTime()
 
+        val refreshToken = RefreshToken(
+            userId = user.userId,
+            token = passwordEncoder.encode(refresh),
+            timeToLive = jwtTokenProvider.getRefreshTimeToLive()
+        )
+        refreshTokenRepository.save(refreshToken)
+
         val response = SigninResponseDto(
             accessToken = access,
             refreshToken = refresh,
             expiredAt = expiredAt
         )
+
         return ResponseEntity(response, HttpStatus.OK)
     }
 }

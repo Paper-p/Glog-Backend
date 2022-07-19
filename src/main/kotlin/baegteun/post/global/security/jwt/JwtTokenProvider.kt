@@ -46,9 +46,9 @@ class JwtTokenProvider(
         return null
     }
 
-    fun getExpiredTime(): ZonedDateTime {
-        return ZonedDateTime.now().plusSeconds(ACCESS_EXP)
-    }
+    fun getExpiredTime(): ZonedDateTime = ZonedDateTime.now().plusSeconds(ACCESS_EXP)
+
+    fun getRefreshTimeToLive(): Long = REFRESH_EXP
 
     fun authentication(token: String): Authentication {
         val userDetails = authDetailsService.loadUserByUsername(getTokenSubject(token, jwtProperties.accessSecret))
