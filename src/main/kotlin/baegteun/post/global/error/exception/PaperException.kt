@@ -1,4 +1,7 @@
 package baegteun.post.global.error.exception
 
-class PaperException {
-}
+import baegteun.post.global.error.ErrorCode
+
+class PaperException(
+    val errorCode: ErrorCode
+): RuntimeException()
