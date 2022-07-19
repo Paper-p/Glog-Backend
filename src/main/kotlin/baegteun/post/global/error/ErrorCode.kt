@@ -12,5 +12,8 @@ enum class ErrorCode(val status: Int, val message: String) {
 
     USER_NOT_FOUND(HttpStatus.NOT_FOUND.value(), "User Not Found"),
 
+    AlreadyExistUserId(HttpStatus.CONFLICT.value(), "UserId is already exist"),
+    AlreadyExistNickname(HttpStatus.CONFLICT.value(), "Nickname is already exist"),
+
     INTERNAL_SERVER_ERROR(500, "Internal Server Error"),
 }
