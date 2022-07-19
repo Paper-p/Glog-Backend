@@ -5,8 +5,7 @@ import baegteun.post.domain.auth.domain.repository.RefreshTokenRepository
 import baegteun.post.domain.auth.exception.PasswordMismatchException
 import baegteun.post.domain.auth.presentation.dto.request.SigninRequestDto
 import baegteun.post.domain.auth.presentation.dto.response.SigninResponseDto
-import baegteun.post.domain.user.dao.UserUtil
-import baegteun.post.domain.user.domain.repository.UserRepository
+import baegteun.post.domain.user.utils.UserUtil
 import baegteun.post.global.security.jwt.JwtTokenProvider
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity

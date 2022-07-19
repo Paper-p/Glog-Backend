@@ -1,4 +1,4 @@
-package baegteun.post.domain.user.dao
+package baegteun.post.domain.user.utils
 
 import baegteun.post.domain.user.domain.entity.User
 

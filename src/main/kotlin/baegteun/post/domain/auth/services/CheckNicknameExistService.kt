@@ -1,6 +1,6 @@
 package baegteun.post.domain.auth.services
 
-import baegteun.post.domain.user.dao.UserUtil
+import baegteun.post.domain.user.utils.UserUtil
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service

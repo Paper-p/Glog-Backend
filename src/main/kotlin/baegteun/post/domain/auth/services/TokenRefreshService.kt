@@ -2,7 +2,7 @@ package baegteun.post.domain.auth.services
 
 import baegteun.post.domain.auth.domain.repository.RefreshTokenRepository
 import baegteun.post.domain.auth.presentation.dto.response.TokenRefreshResponseDto
-import baegteun.post.domain.user.dao.UserUtil
+import baegteun.post.domain.user.utils.UserUtil
 import baegteun.post.domain.user.exception.UserNotFoundException
 import baegteun.post.global.security.jwt.JwtTokenProvider
 import org.springframework.http.HttpStatus

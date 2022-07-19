@@ -33,11 +33,11 @@ class AuthController(
     fun signin(@RequestBody @Valid signinRequestDto: SigninRequestDto): ResponseEntity<SigninResponseDto> =
         signinService.execute(signinRequestDto)
 
-    @RequestMapping(name = "valid-id", method = [RequestMethod.HEAD])
-    fun checkUseridExist(@RequestParam userId: String): ResponseEntity<Void> =
+    @RequestMapping("/valid-id", method = [RequestMethod.HEAD])
+    fun checkUserIdExist(@RequestParam userId: String): ResponseEntity<Void> =
         checkUserIdExistService.execute(userId)
 
-    @RequestMapping(name = "valid-name", method = [RequestMethod.HEAD])
+    @RequestMapping(name = "/valid-name", method = [RequestMethod.HEAD])
     fun checkNicknameExist(@RequestParam nickname: String): ResponseEntity<Void> =
         checkNicknameExistService.execute(nickname)
 

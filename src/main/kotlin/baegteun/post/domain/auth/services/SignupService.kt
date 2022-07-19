@@ -1,7 +1,7 @@
 package baegteun.post.domain.auth.services
 
 import baegteun.post.domain.auth.presentation.dto.request.SignupRequestDto
-import baegteun.post.domain.user.dao.UserUtil
+import baegteun.post.domain.user.utils.UserUtil
 import baegteun.post.domain.user.domain.entity.User
 import baegteun.post.domain.user.domain.repository.UserRepository
 import baegteun.post.infrastructure.image.DefaultImage

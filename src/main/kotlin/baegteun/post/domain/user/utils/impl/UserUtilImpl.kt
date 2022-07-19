@@ -1,6 +1,6 @@
-package baegteun.post.domain.user.dao.impl
+package baegteun.post.domain.user.utils.impl
 
-import baegteun.post.domain.user.dao.UserUtil
+import baegteun.post.domain.user.utils.UserUtil
 import baegteun.post.domain.user.domain.entity.User
 import baegteun.post.domain.user.domain.repository.UserRepository
 import baegteun.post.domain.user.exception.AlreadyExistNicknameException
