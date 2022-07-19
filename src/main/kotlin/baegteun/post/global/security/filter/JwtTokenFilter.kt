@@ -1,5 +1,6 @@
-package baegteun.post.global.security.jwt
+package baegteun.post.global.security.filter
 
+import baegteun.post.global.security.jwt.JwtTokenProvider
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.web.filter.OncePerRequestFilter
 import javax.servlet.FilterChain
