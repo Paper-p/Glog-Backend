@@ -1,6 +1,5 @@
 package baegteun.post.global.security.jwt
 
-import baegteun.post.domain.auth.domain.repository.RefreshTokenRepository
 import baegteun.post.global.security.auth.AuthDetailsService
 import baegteun.post.global.security.exception.ExpiredTokenException
 import baegteun.post.global.security.exception.InvalidTokenException
