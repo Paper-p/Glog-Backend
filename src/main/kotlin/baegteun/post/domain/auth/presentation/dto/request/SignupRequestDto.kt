@@ -13,6 +13,6 @@ data class SignupRequestDto(
     val userId: String,
 
     @field:NotBlank(message = "password는 Null, 공백, 띄어쓰기를 허용하지 않습니다.")
-    @field:Size(min = 8, max = 40, message = "password는 최소 8자, 최대 40자 이빈다.")
+    @field:Size(min = 8, max = 40, message = "password는 최소 8자, 최대 40자 입니다.")
     val password: String
 )
