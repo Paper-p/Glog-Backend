@@ -6,7 +6,8 @@ import org.springframework.http.HttpStatus
 
 @JsonFormat(shape = JsonFormat.Shape.OBJECT)
 enum class ErrorCode(val status: Int, val message: String) {
-
+    EXPIRED_TOKEN(HttpStatus.UNAUTHORIZED.value(), "Expired Token"),
+    INVALID_TOKEN(HttpStatus.UNAUTHORIZED.value(), "Invalid Token"),
 
     USER_NOT_FOUND(HttpStatus.NOT_FOUND.value(), "User Not Found")
 }
