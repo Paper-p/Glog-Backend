@@ -6,6 +6,8 @@ import org.springframework.http.HttpStatus
 
 @JsonFormat(shape = JsonFormat.Shape.OBJECT)
 enum class ErrorCode(val status: Int, val message: String) {
+    PASSWORD_MISMATCH(HttpStatus.BAD_REQUEST.value(), "Password Mismatch"),
+
     EXPIRED_TOKEN(HttpStatus.UNAUTHORIZED.value(), "Expired Token"),
     INVALID_TOKEN(HttpStatus.UNAUTHORIZED.value(), "Invalid Token"),
     UNAUTHORIZED(HttpStatus.UNAUTHORIZED.value(), "Unauthorized"),

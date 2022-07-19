@@ -1,6 +1,9 @@
 package baegteun.post.domain.auth.presentation
 
+import baegteun.post.domain.auth.presentation.dto.request.SigninRequestDto
 import baegteun.post.domain.auth.presentation.dto.request.SignupRequestDto
+import baegteun.post.domain.auth.presentation.dto.response.SigninResponseDto
+import baegteun.post.domain.auth.services.SigninService
 import baegteun.post.domain.auth.services.SignupService
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PostMapping
@@ -12,8 +15,16 @@ import javax.validation.Valid
 @RestController
 @RequestMapping("auth")
 class AuthController(
-    private val signupService: SignupService
+    private val signupService: SignupService,
+    private val signinService: SigninService,
 ) {
     @PostMapping("signup")
-    fun signup(@RequestBody @Valid signupRequestDto: SignupRequestDto): ResponseEntity<Void> = signupService.execute(signupRequestDto)
+    fun signup(@RequestBody @Valid signupRequestDto: SignupRequestDto): ResponseEntity<Void> =
+        signupService.execute(signupRequestDto)
+
+    @PostMapping("signin")
+    fun signin(@RequestBody @Valid signinRequestDto: SigninRequestDto): ResponseEntity<SigninResponseDto> =
+        signinService.execute(signinRequestDto)
+
+
 }

@@ -11,8 +11,10 @@ import io.jsonwebtoken.SignatureAlgorithm
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.Authentication
 import org.springframework.stereotype.Component
+import java.time.ZonedDateTime
 import java.util.*
 import javax.servlet.http.HttpServletRequest
+
 
 @Component
 class JwtTokenProvider(
@@ -42,6 +44,10 @@ class JwtTokenProvider(
         if (token != null && token.startsWith("Bearer "))
             return token.replace("Bearer ", "")
         return null
+    }
+
+    fun getExpiredTime(): ZonedDateTime {
+        return ZonedDateTime.now().plusSeconds(ACCESS_EXP)
     }
 
     fun authentication(token: String): Authentication {
