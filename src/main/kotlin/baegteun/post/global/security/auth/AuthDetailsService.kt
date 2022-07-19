@@ -12,5 +12,4 @@ class AuthDetailsService(
         userRepository.findByUserId(username ?: "")?.let {
             AuthDetails(it)
         } ?: throw UserNotFoundException.EXCEPTION
-
 }
