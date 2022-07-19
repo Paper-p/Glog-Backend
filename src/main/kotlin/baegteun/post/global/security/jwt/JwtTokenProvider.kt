@@ -19,8 +19,7 @@ import javax.servlet.http.HttpServletRequest
 @Component
 class JwtTokenProvider(
     private val jwtProperties: JwtProperties,
-    private val authDetailsService: AuthDetailsService,
-    private val refreshTokenRepository: RefreshTokenRepository
+    private val authDetailsService: AuthDetailsService
 ) {
     companion object {
         private const val ACCESS_TYPE = "access"
