@@ -31,7 +31,6 @@ class JwtTokenProvider(
     fun generateAccessToken(userId: String): String =
         generateToken(userId, ACCESS_TYPE, jwtProperties.accessSecret, ACCESS_EXP)
 
-
     fun generateRefreshToken(userId: String): String =
         generateToken(userId, REFRESH_TYPE, jwtProperties.refreshSecret, REFRESH_EXP)
 
