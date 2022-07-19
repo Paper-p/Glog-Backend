@@ -1,5 +1,8 @@
 package baegteun.post.global.security
 
+import baegteun.post.global.security.filter.ExceptionFilter
+import baegteun.post.global.security.filter.JwtTokenFilter
+import baegteun.post.global.security.jwt.JwtTokenProvider
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -9,11 +12,13 @@ import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.web.SecurityFilterChain
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
 import org.springframework.web.cors.CorsUtils
 
 @Configuration
 @EnableWebSecurity
 class SecurityConfig(
+    private val jwtTokenProvider: JwtTokenProvider,
     private val objectMapper: ObjectMapper
 ) {
     @Bean
@@ -41,6 +46,8 @@ class SecurityConfig(
             .authenticationEntryPoint(CustomAuthenticationEntryPoint(objectMapper))
 
             .and()
+            .addFilterBefore(ExceptionFilter(objectMapper), UsernamePasswordAuthenticationFilter::class.java)
+            .addFilterAfter(JwtTokenFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter::class.java)
 
         return http.build()
     }
