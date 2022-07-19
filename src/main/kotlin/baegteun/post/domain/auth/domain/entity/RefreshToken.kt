@@ -10,7 +10,7 @@ import javax.persistence.Id
 @RedisHash
 class RefreshToken(
     @Id
-    var userId: Long,
+    var userId: String,
 
     @Indexed
     var token: String,
