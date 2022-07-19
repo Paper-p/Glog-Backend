@@ -1,7 +1,7 @@
 package baegteun.post.domain.auth.services
 
-import baegteun.post.domain.auth.domain.entity.RefreshToken
 import baegteun.post.domain.auth.domain.repository.RefreshTokenRepository
+import baegteun.post.domain.auth.exception.RefreshTokenNotFoundException
 import baegteun.post.domain.auth.presentation.dto.response.TokenRefreshResponseDto
 import baegteun.post.domain.user.utils.UserUtil
 import baegteun.post.domain.user.exception.UserNotFoundException
@@ -26,7 +26,7 @@ class TokenRefreshService(
         if (!userUtil.existsByUserId(userId))
             throw UserNotFoundException.EXCEPTION
 
-        val redisRefreshToken = refreshTokenRepository.findById(userId).orElseThrow { UserNotFoundException.EXCEPTION }
+        val redisRefreshToken = refreshTokenRepository.findById(userId).orElseThrow { RefreshTokenNotFoundException.EXCEPTION }
         println(passwordEncoder.matches(refreshToken, redisRefreshToken.token))
         if (!passwordEncoder.matches(refreshToken, redisRefreshToken.token))
             throw ExpiredTokenException.EXCEPTION
