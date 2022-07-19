@@ -35,8 +35,12 @@ class SecurityConfig(
 
 
             .anyRequest().denyAll()
-            .and()
 
+            .and()
+            .exceptionHandling()
+            .authenticationEntryPoint(CustomAuthenticationEntryPoint(objectMapper))
+
+            .and()
 
         return http.build()
     }
