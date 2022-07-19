@@ -8,4 +8,5 @@ interface UserUtil {
     fun fetchUserById(id: Long): User
     fun checkExistsUserId(userId: String)
     fun checkExistsNickname(nickname: String)
+    fun existsByUserId(userId: String): Boolean
 }

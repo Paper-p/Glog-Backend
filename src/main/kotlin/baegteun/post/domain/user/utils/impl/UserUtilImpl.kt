@@ -33,4 +33,7 @@ class UserUtilImpl(
         if (userRepository.existsByNickname(nickname))
             throw AlreadyExistNicknameException.EXCEPTION
     }
+
+    override fun existsByUserId(userId: String): Boolean =
+        userRepository.existsByUserId(userId)
 }

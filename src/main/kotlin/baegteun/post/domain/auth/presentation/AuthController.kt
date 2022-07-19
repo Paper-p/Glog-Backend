@@ -37,7 +37,7 @@ class AuthController(
     fun checkUserIdExist(@RequestParam userId: String): ResponseEntity<Void> =
         checkUserIdExistService.execute(userId)
 
-    @RequestMapping(name = "/valid-name", method = [RequestMethod.HEAD])
+    @RequestMapping("/valid-name", method = [RequestMethod.HEAD])
     fun checkNicknameExist(@RequestParam nickname: String): ResponseEntity<Void> =
         checkNicknameExistService.execute(nickname)
 

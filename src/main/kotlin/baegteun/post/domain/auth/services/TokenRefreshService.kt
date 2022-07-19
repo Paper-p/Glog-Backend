@@ -1,12 +1,15 @@
 package baegteun.post.domain.auth.services
 
+import baegteun.post.domain.auth.domain.entity.RefreshToken
 import baegteun.post.domain.auth.domain.repository.RefreshTokenRepository
 import baegteun.post.domain.auth.presentation.dto.response.TokenRefreshResponseDto
 import baegteun.post.domain.user.utils.UserUtil
 import baegteun.post.domain.user.exception.UserNotFoundException
+import baegteun.post.global.security.exception.ExpiredTokenException
 import baegteun.post.global.security.jwt.JwtTokenProvider
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -15,18 +18,25 @@ import org.springframework.transaction.annotation.Transactional
 class TokenRefreshService(
     private val userUtil: UserUtil,
     private val jwtTokenProvider: JwtTokenProvider,
-    private val refreshTokenRepository: RefreshTokenRepository
+    private val refreshTokenRepository: RefreshTokenRepository,
+    private val passwordEncoder: PasswordEncoder
 ) {
     fun execute(refreshToken: String): ResponseEntity<TokenRefreshResponseDto> {
         val userId = jwtTokenProvider.exactUserIdFromRefreshToken(refreshToken)
-        userUtil.fetchUserByUserId(userId)
+        if (!userUtil.existsByUserId(userId))
+            throw UserNotFoundException.EXCEPTION
+
+        val redisRefreshToken = refreshTokenRepository.findById(userId).orElseThrow { UserNotFoundException.EXCEPTION }
+        println(passwordEncoder.matches(refreshToken, redisRefreshToken.token))
+        if (!passwordEncoder.matches(refreshToken, redisRefreshToken.token))
+            throw ExpiredTokenException.EXCEPTION
 
         val access = jwtTokenProvider.generateAccessToken(userId)
         val refresh = jwtTokenProvider.generateRefreshToken(userId)
         val expiredAt = jwtTokenProvider.getExpiredTime()
 
-        val redisRefreshToken = refreshTokenRepository.findById(userId).orElseThrow { UserNotFoundException.EXCEPTION }
-        redisRefreshToken.updateToken(refresh, jwtTokenProvider.getRefreshTimeToLive())
+        redisRefreshToken.updateToken(passwordEncoder.encode(refresh), jwtTokenProvider.getRefreshTimeToLive())
+        refreshTokenRepository.save(redisRefreshToken)
 
         val response = TokenRefreshResponseDto(
             accessToken = access,
