@@ -6,6 +6,7 @@ import baegteun.post.global.security.jwt.JwtTokenProvider
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.http.HttpMethod
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.http.SessionCreationPolicy
@@ -38,6 +39,12 @@ class SecurityConfig(
             .authorizeRequests()
             .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
 
+            // auth
+            .antMatchers(HttpMethod.POST, "/auth/signup").permitAll()
+            .antMatchers(HttpMethod.POST, "/auth/signin").permitAll()
+            .antMatchers(HttpMethod.HEAD, "/auth/valid-id").permitAll()
+            .antMatchers(HttpMethod.HEAD, "/auth/valid-name").permitAll()
+            .antMatchers(HttpMethod.PUT, "/auth").permitAll()
 
             .anyRequest().denyAll()
 
