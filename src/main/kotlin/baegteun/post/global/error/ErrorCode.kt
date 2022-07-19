@@ -10,5 +10,7 @@ enum class ErrorCode(val status: Int, val message: String) {
     INVALID_TOKEN(HttpStatus.UNAUTHORIZED.value(), "Invalid Token"),
     UNAUTHORIZED(HttpStatus.UNAUTHORIZED.value(), "Unauthorized"),
 
-    USER_NOT_FOUND(HttpStatus.NOT_FOUND.value(), "User Not Found")
+    USER_NOT_FOUND(HttpStatus.NOT_FOUND.value(), "User Not Found"),
+
+    INTERNAL_SERVER_ERROR(500, "Internal Server Error"),
 }
