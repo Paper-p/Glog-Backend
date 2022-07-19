@@ -3,13 +3,13 @@ package baegteun.post.domain.auth.presentation
 import baegteun.post.domain.auth.presentation.dto.request.SigninRequestDto
 import baegteun.post.domain.auth.presentation.dto.request.SignupRequestDto
 import baegteun.post.domain.auth.presentation.dto.response.SigninResponseDto
-import baegteun.post.domain.auth.services.CheckNicknameExistService
-import baegteun.post.domain.auth.services.CheckUserIdExistService
-import baegteun.post.domain.auth.services.SigninService
-import baegteun.post.domain.auth.services.SignupService
+import baegteun.post.domain.auth.presentation.dto.response.TokenRefreshResponseDto
+import baegteun.post.domain.auth.services.*
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.RequestHeader
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
 import org.springframework.web.bind.annotation.RequestParam
@@ -22,7 +22,8 @@ class AuthController(
     private val signupService: SignupService,
     private val signinService: SigninService,
     private val checkUserIdExistService: CheckUserIdExistService,
-    private val checkNicknameExistService: CheckNicknameExistService
+    private val checkNicknameExistService: CheckNicknameExistService,
+    private val tokenRefreshService: TokenRefreshService
 ) {
     @PostMapping("signup")
     fun signup(@RequestBody @Valid signupRequestDto: SignupRequestDto): ResponseEntity<Void> =
@@ -39,4 +40,8 @@ class AuthController(
     @RequestMapping(name = "valid-name", method = [RequestMethod.HEAD])
     fun checkNicknameExist(@RequestParam nickname: String): ResponseEntity<Void> =
         checkNicknameExistService.execute(nickname)
+
+    @PutMapping
+    fun tokenRefresh(@RequestHeader("Refresh-Token") refreshToken: String): ResponseEntity<TokenRefreshResponseDto> =
+        tokenRefreshService.execute(refreshToken)
 }
