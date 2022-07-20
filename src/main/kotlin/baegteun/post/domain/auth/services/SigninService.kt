@@ -33,7 +33,7 @@ class SigninService(
 
         val refreshToken = RefreshToken(
             userId = user.userId,
-            token = passwordEncoder.encode(refresh),
+            token = refresh,
             timeToLive = jwtTokenProvider.getRefreshTimeToLive()
         )
         refreshTokenRepository.save(refreshToken)

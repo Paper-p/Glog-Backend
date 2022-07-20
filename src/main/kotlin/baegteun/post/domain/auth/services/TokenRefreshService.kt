@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import java.util.Objects
 
 @Transactional
 @Service
@@ -27,15 +28,12 @@ class TokenRefreshService(
             throw UserNotFoundException.EXCEPTION
 
         val redisRefreshToken = refreshTokenRepository.findById(userId).orElseThrow { RefreshTokenNotFoundException.EXCEPTION }
-        println(passwordEncoder.matches(refreshToken, redisRefreshToken.token))
-        if (!passwordEncoder.matches(refreshToken, redisRefreshToken.token))
-            throw ExpiredTokenException.EXCEPTION
 
         val access = jwtTokenProvider.generateAccessToken(userId)
         val refresh = jwtTokenProvider.generateRefreshToken(userId)
         val expiredAt = jwtTokenProvider.getExpiredTime()
 
-        redisRefreshToken.updateToken(passwordEncoder.encode(refresh), jwtTokenProvider.getRefreshTimeToLive())
+        redisRefreshToken.updateToken(refresh, jwtTokenProvider.getRefreshTimeToLive())
         refreshTokenRepository.save(redisRefreshToken)
 
         val response = TokenRefreshResponseDto(
