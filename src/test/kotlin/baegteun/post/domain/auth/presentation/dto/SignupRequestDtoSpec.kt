@@ -9,8 +9,8 @@ import javax.validation.Validator
 import javax.validation.ValidatorFactory
 
 internal class SignupRequestDtoSpec: DescribeSpec({
-    var factory: ValidatorFactory = Validation.buildDefaultValidatorFactory()
-    var validator: Validator = factory.validator
+    val factory: ValidatorFactory = Validation.buildDefaultValidatorFactory()
+    val validator: Validator = factory.validator
 
     afterEach {
         factory.close()
