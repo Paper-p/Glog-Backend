@@ -14,6 +14,8 @@ enum class ErrorCode(val status: Int, val message: String) {
     INVALID_TOKEN(401, "Invalid Token"),
     UNAUTHORIZED(401, "Unauthorized"),
 
+    NOT_OWNER_THE_FEED(403, "Not owner the feed"),
+
     USER_NOT_FOUND(404, "User Not Found"),
     REFRESH_TOKEN_NOT_FOUND(404, "RefreshToken Not Found"),
     FEED_NOT_FOUND(404, "Feed Not Found"),
