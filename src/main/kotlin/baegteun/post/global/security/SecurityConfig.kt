@@ -46,6 +46,12 @@ class SecurityConfig(
             .antMatchers(HttpMethod.HEAD, "/auth/valid-name").permitAll()
             .antMatchers(HttpMethod.PUT, "/auth").permitAll()
 
+            // feed
+            .antMatchers(HttpMethod.GET, "/feed/list").authenticated()
+
+            // image
+            .antMatchers(HttpMethod.POST, "/image").authenticated()
+
             .anyRequest().denyAll()
 
             .and()
