@@ -14,15 +14,15 @@ class S3Config(
     @Value("\${cloud.aws.credentials.accessKey}")
     private val accessKey: String,
 
-    @Value("\${cloud.aws.credentials.refreshKey}")
-    private val refreshKey: String,
+    @Value("\${cloud.aws.credentials.secretKey}")
+    private val secretKey: String,
 
     @Value("\${cloud.aws.region.static}")
     private val region: String
 ) {
     @Bean
     fun amazonS3Client(): AmazonS3Client {
-        val cred = BasicAWSCredentials(accessKey, refreshKey)
+        val cred = BasicAWSCredentials(accessKey, secretKey)
         return AmazonS3ClientBuilder.standard()
             .withRegion(region)
             .withCredentials(AWSStaticCredentialsProvider(cred))
