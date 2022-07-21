@@ -1,7 +1,7 @@
 package baegteun.post.domain.hit.domain.entity
 
+import org.springframework.data.annotation.Id
 import org.springframework.data.redis.core.RedisHash
-import javax.persistence.Id
 
 @RedisHash
 class Hit(
