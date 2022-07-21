@@ -8,10 +8,11 @@ import com.amazonaws.services.s3.AmazonS3Client
 import com.amazonaws.services.s3.model.CannedAccessControlList
 import com.amazonaws.services.s3.model.ObjectMetadata
 import com.amazonaws.services.s3.model.PutObjectRequest
+import org.springframework.stereotype.Component
 import org.springframework.web.multipart.MultipartFile
 import java.util.UUID
 
-
+@Component
 class ImageUtilImpl(
     private val s3Properties: S3Properties,
     private val amazonS3Client: AmazonS3Client
