@@ -26,6 +26,7 @@ class DetailFeedService(
         val feedImages = feedImageRepository.findAllByFeed(feed)
         val hit = hitRepository.findById(feedId).orElseGet { Hit(feedId, 0) }
         hit.increaseHitCount()
+        hitRepository.save(hit)
         val isMine = Objects.equals(feed.user.id, userUtil.fetchCurrentUser().id)
         val response = DetailFeedResponseDto(feed, feedImages.map { it.url }, hit.hitCount, isMine)
         return ResponseEntity(response, HttpStatus.OK)
