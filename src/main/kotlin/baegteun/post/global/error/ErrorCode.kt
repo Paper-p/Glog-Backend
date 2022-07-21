@@ -16,6 +16,7 @@ enum class ErrorCode(val status: Int, val message: String) {
 
     USER_NOT_FOUND(404, "User Not Found"),
     REFRESH_TOKEN_NOT_FOUND(404, "RefreshToken Not Found"),
+    FEED_NOT_FOUND(404, "Feed Not Found"),
 
     AlreadyExistUserId(409, "UserId is already exist"),
     AlreadyExistNickname(409, "Nickname is already exist"),
