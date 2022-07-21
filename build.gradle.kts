@@ -33,7 +33,6 @@ dependencies {
         exclude("org.slf4j", "slf4j-simple")
     }
     implementation("org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE")
-    implementation("org.springframework.cloud:spring-cloud-aws-autoconfigure:2.2.6.RELEASE")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
