@@ -10,10 +10,6 @@ import javax.validation.constraints.Size
 
 @Entity
 class User(
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long,
-
     @field:NotNull
     @Column(unique = true)
     @field:Size(max = 20)
@@ -31,4 +27,8 @@ class User(
     @field:NotNull
     @field:Size(max = 100)
     var profileImageUrl: String
-)
+) {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    val id: Long = 0
+}

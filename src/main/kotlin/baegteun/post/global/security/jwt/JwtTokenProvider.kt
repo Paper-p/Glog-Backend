@@ -1,6 +1,5 @@
 package baegteun.post.global.security.jwt
 
-import baegteun.post.domain.auth.domain.repository.RefreshTokenRepository
 import baegteun.post.global.security.auth.AuthDetailsService
 import baegteun.post.global.security.exception.ExpiredTokenException
 import baegteun.post.global.security.exception.InvalidTokenException
@@ -11,14 +10,15 @@ import io.jsonwebtoken.SignatureAlgorithm
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.Authentication
 import org.springframework.stereotype.Component
+import java.time.ZonedDateTime
 import java.util.*
 import javax.servlet.http.HttpServletRequest
+
 
 @Component
 class JwtTokenProvider(
     private val jwtProperties: JwtProperties,
-    private val authDetailsService: AuthDetailsService,
-    private val refreshTokenRepository: RefreshTokenRepository
+    private val authDetailsService: AuthDetailsService
 ) {
     companion object {
         private const val ACCESS_TYPE = "access"
@@ -29,7 +29,6 @@ class JwtTokenProvider(
 
     fun generateAccessToken(userId: String): String =
         generateToken(userId, ACCESS_TYPE, jwtProperties.accessSecret, ACCESS_EXP)
-
 
     fun generateRefreshToken(userId: String): String =
         generateToken(userId, REFRESH_TYPE, jwtProperties.refreshSecret, REFRESH_EXP)
@@ -43,6 +42,10 @@ class JwtTokenProvider(
             return token.replace("Bearer ", "")
         return null
     }
+
+    fun getExpiredTime(): ZonedDateTime = ZonedDateTime.now().plusSeconds(ACCESS_EXP)
+
+    fun getRefreshTimeToLive(): Long = REFRESH_EXP
 
     fun authentication(token: String): Authentication {
         val userDetails = authDetailsService.loadUserByUsername(getTokenSubject(token, jwtProperties.accessSecret))
