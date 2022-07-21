@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus
 @JsonFormat(shape = JsonFormat.Shape.OBJECT)
 enum class ErrorCode(val status: Int, val message: String) {
     PASSWORD_MISMATCH(400, "Password Mismatch"),
+    INVALID_IMAGE(400, "Invalid Image"),
+    FAILED_TO_SAVE_IMAGE(400, "Failed to save image"),
 
     EXPIRED_TOKEN(401, "Expired Token"),
     INVALID_TOKEN(401, "Invalid Token"),

@@ -1,5 +1,7 @@
 package baegteun.post.domain.user.domain.entity
 
+import baegteun.post.infrastructure.image.DefaultImage
+import org.hibernate.annotations.ColumnDefault
 import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
@@ -26,6 +28,7 @@ class User(
 
     @field:NotNull
     @field:Size(max = 100)
+    @ColumnDefault(DefaultImage.PROFILE_IMAGE)
     var profileImageUrl: String
 ) {
     @Id
