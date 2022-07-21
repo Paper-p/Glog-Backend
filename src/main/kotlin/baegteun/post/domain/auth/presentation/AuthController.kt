@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 import javax.validation.Valid
+import javax.validation.constraints.NotBlank
 
 @RestController
 @RequestMapping("auth")
@@ -34,11 +35,11 @@ class AuthController(
         signinService.execute(signinRequestDto)
 
     @RequestMapping("/valid-id", method = [RequestMethod.HEAD])
-    fun checkUserIdExist(@RequestParam userId: String): ResponseEntity<Void> =
+    fun checkUserIdExist(@NotBlank @RequestParam userId: String): ResponseEntity<Void> =
         checkUserIdExistService.execute(userId)
 
     @RequestMapping("/valid-name", method = [RequestMethod.HEAD])
-    fun checkNicknameExist(@RequestParam nickname: String): ResponseEntity<Void> =
+    fun checkNicknameExist(@NotBlank @RequestParam nickname: String): ResponseEntity<Void> =
         checkNicknameExistService.execute(nickname)
 
     @PutMapping
