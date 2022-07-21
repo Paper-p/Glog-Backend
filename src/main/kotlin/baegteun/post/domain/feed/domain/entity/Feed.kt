@@ -16,4 +16,9 @@ class Feed(
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     val user: User
-): BaseTimeIdEntity()
+): BaseTimeIdEntity() {
+    fun update(title: String, content: String) {
+        this.title = title
+        this.content = content
+    }
+}
