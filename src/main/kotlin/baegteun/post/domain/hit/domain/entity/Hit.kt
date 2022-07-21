@@ -9,4 +9,8 @@ class Hit(
     var feedId: Long,
 
     var hitCount: Int
-)
+) {
+    fun increaseHitCount() {
+        hitCount += 1
+    }
+}
