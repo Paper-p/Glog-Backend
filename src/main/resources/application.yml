@@ -35,3 +35,10 @@ cloud:
       bucket: ${S3_BUCKET}
     stack:
       auto: false
+
+logging:
+  level:
+    com:
+      amazonaws:
+        util:
+          EC2MetadataUtils: error
