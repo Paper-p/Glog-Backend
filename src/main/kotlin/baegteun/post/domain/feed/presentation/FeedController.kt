@@ -23,7 +23,7 @@ class FeedController(
     fun allFeedList(@PageableDefault(size = 5) pageable: Pageable): ResponseEntity<AllFeedListResponseDto> =
         allFeedListService.execute(pageable)
 
-    @GetMapping("\${id}")
+    @GetMapping("{id}")
     fun detailFeed(@NotBlank @PathVariable id: Long): ResponseEntity<DetailFeedResponseDto> =
         detailFeedService.execute(id)
 }

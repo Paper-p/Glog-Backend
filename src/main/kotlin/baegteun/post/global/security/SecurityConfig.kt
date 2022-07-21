@@ -47,7 +47,8 @@ class SecurityConfig(
             .antMatchers(HttpMethod.PUT, "/auth").permitAll()
 
             // feed
-            .antMatchers(HttpMethod.GET, "/feed/list").authenticated()
+            .antMatchers(HttpMethod.GET, "/feed/list").permitAll()
+            .antMatchers(HttpMethod.GET, "/feed/{id}").authenticated()
 
             // image
             .antMatchers(HttpMethod.POST, "/image").authenticated()
