@@ -3,7 +3,6 @@ package baegteun.post.domain.feed.services
 import baegteun.post.domain.feed.domain.repository.FeedImageRepository
 import baegteun.post.domain.feed.domain.repository.FeedRepository
 import baegteun.post.domain.feed.exception.FeedNotFoundException
-import baegteun.post.domain.feed.presentation.dto.response.AuthorDto
 import baegteun.post.domain.feed.presentation.dto.response.DetailFeedResponseDto
 import baegteun.post.domain.hit.domain.entity.Hit
 import baegteun.post.domain.hit.domain.repository.HitRepository
@@ -12,7 +11,6 @@ import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
-import java.time.ZoneId
 import java.util.Objects
 
 @Transactional
@@ -28,6 +26,7 @@ class DetailFeedService(
         val feedImages = feedImageRepository.findAllByFeed(feed)
         val hit = hitRepository.findById(feedId).orElseGet { Hit(feedId, 0) }
         hit.increaseHitCount()
+        hitRepository.save(hit)
         val isMine = Objects.equals(feed.user.id, userUtil.fetchCurrentUser().id)
         val response = DetailFeedResponseDto(feed, feedImages.map { it.url }, hit.hitCount, isMine)
         return ResponseEntity(response, HttpStatus.OK)
