@@ -56,6 +56,9 @@ class SecurityConfig(
             // image
             .antMatchers(HttpMethod.POST, "/image").authenticated()
 
+            // user
+            .antMatchers(HttpMethod.GET, "/user/my").authenticated()
+
             .anyRequest().denyAll()
 
             .and()
