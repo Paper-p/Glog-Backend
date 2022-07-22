@@ -22,7 +22,7 @@ class AllFeedListService(
         val response = AllFeedListResponseDto(
             size = pageable.pageSize,
             page = pageable.pageNumber,
-            list = lists.map { FeedListDto(it.id, it.title, it.createdAt.atZone(ZoneId.of("Asia/Seoul"))) }
+            list = lists.map { FeedListDto(it) }
         )
         return ResponseEntity(response, HttpStatus.OK)
     }
