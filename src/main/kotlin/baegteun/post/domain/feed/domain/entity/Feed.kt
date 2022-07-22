@@ -13,11 +13,11 @@ class Feed(
     @Column(columnDefinition = "TEXT", nullable = false)
     var content: String,
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = [CascadeType.REMOVE])
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false,)
     val user: User,
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = [CascadeType.REMOVE])
+    @OneToMany(mappedBy = "feed", fetch = FetchType.LAZY, cascade = [CascadeType.REMOVE])
     var feedImages: List<FeedImage> = listOf()
 ): BaseTimeIdEntity() {
     fun update(title: String, content: String) {

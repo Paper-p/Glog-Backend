@@ -27,13 +27,13 @@ class UpdateFeedService(
 
         feed.update(req.title, req.content)
 
-        val feedImages = feedUtil.fetchFeedImages(feed)
+        val feedImages = feed.feedImages
 
         val removedImages = feedImages.filter { !req.imageUrls.contains(it.url) }
-        removedImages.forEach(feedImageRepository::delete)
+        feedImageRepository.deleteAll(removedImages)
 
         val addedImages = req.imageUrls.filter { new -> !feedImages.map { it.url }.contains(new) }
-        addedImages.forEach { feedImageRepository.save(FeedImage(it, feed)) }
+        feedImageRepository.saveAll(addedImages.map { FeedImage(it, feed) })
 
         return ResponseEntity(HttpStatus.NO_CONTENT)
     }

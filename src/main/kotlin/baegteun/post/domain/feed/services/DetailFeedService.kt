@@ -1,5 +1,6 @@
 package baegteun.post.domain.feed.services
 
+import baegteun.post.domain.feed.domain.entity.FeedImage
 import baegteun.post.domain.feed.domain.repository.FeedImageRepository
 import baegteun.post.domain.feed.domain.repository.FeedRepository
 import baegteun.post.domain.feed.exception.FeedNotFoundException
@@ -23,7 +24,7 @@ class DetailFeedService(
 ) {
     fun execute(feedId: Long): ResponseEntity<DetailFeedResponseDto> {
         val feed = feedUtil.fetchFeedById(feedId)
-        val feedImages = feedUtil.fetchFeedImages(feed)
+        val feedImages = feed.feedImages
         val hit = hitRepository.findById(feedId).orElseGet { Hit(feedId, 0) }
         hit.increaseHitCount()
         hitRepository.save(hit)
