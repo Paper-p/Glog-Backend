@@ -2,6 +2,7 @@ package baegteun.post.domain.user.services
 
 import baegteun.post.domain.user.presentation.dto.response.UserProfileResponseDto
 import baegteun.post.domain.user.utils.UserUtil
+import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -17,6 +18,6 @@ class FetchUserProfileService(
             user,
             user.feeds
         )
-        return ResponseEntity.ok().build()
+        return ResponseEntity(response, HttpStatus.OK)
     }
 }
