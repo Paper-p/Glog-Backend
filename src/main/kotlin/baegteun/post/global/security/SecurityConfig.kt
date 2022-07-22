@@ -58,6 +58,7 @@ class SecurityConfig(
 
             // user
             .antMatchers(HttpMethod.GET, "/user/my").authenticated()
+            .antMatchers(HttpMethod.PUT, "/user").authenticated()
 
             .anyRequest().denyAll()
 
