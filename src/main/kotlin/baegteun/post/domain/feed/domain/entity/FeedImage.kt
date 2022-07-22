@@ -8,10 +8,10 @@ import javax.validation.constraints.Size
 @Entity
 class FeedImage(
     @field:NotNull
-    @Size(max = 255)
+    @field:Size(max = 255)
     val url: String,
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = [CascadeType.REMOVE])
     @JoinColumn(name = "feed_id", nullable = false)
     val feed: Feed
 ): BaseIdEntity()
