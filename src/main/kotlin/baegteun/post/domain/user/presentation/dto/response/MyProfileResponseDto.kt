@@ -4,7 +4,7 @@ import baegteun.post.domain.feed.domain.entity.Feed
 import baegteun.post.domain.feed.presentation.dto.response.FeedListDto
 import baegteun.post.domain.user.domain.entity.User
 
-data class MyPageResponseDto(
+data class MyProfileResponseDto(
     val userId: String,
     val nickname: String,
     val profileImageUrl: String,

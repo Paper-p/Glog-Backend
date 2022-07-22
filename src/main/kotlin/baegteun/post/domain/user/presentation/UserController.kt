@@ -1,7 +1,7 @@
 package baegteun.post.domain.user.presentation
 
 import baegteun.post.domain.user.presentation.dto.request.UpdateProfileImageRequestDto
-import baegteun.post.domain.user.presentation.dto.response.MyPageResponseDto
+import baegteun.post.domain.user.presentation.dto.response.MyProfileResponseDto
 import baegteun.post.domain.user.presentation.dto.response.UserProfileResponseDto
 import baegteun.post.domain.user.services.FetchMyProfileService
 import baegteun.post.domain.user.services.FetchUserProfileService
@@ -24,7 +24,7 @@ class UserController(
     private val fetchUserProfileService: FetchUserProfileService
 ) {
     @GetMapping("my")
-    fun fetchMyProfile(): ResponseEntity<MyPageResponseDto> =
+    fun fetchMyProfile(): ResponseEntity<MyProfileResponseDto> =
         fetchMyProfileService.execute()
 
     @PutMapping
