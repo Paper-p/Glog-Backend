@@ -11,12 +11,7 @@ import org.springframework.stereotype.Component
 @Component
 class FeedUtilImpl(
     private val feedRepository: FeedRepository,
-    private val feedImageRepository: FeedImageRepository
 ): FeedUtil {
     override fun fetchFeedById(id: Long): Feed =
         feedRepository.findById(id).orElseThrow { FeedNotFoundException.EXCEPTION }
-
-    override fun fetchFeedImages(feed: Feed): List<FeedImage> =
-        feedImageRepository.findAllByFeed(feed)
-
 }

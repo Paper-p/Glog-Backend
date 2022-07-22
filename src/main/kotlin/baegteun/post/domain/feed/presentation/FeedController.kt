@@ -4,13 +4,11 @@ import baegteun.post.domain.feed.presentation.dto.request.CreateFeedRequestDto
 import baegteun.post.domain.feed.presentation.dto.request.UpdateFeedRequestDto
 import baegteun.post.domain.feed.presentation.dto.response.AllFeedListResponseDto
 import baegteun.post.domain.feed.presentation.dto.response.DetailFeedResponseDto
-import baegteun.post.domain.feed.services.AllFeedListService
-import baegteun.post.domain.feed.services.CreateFeedService
-import baegteun.post.domain.feed.services.DetailFeedService
-import baegteun.post.domain.feed.services.UpdateFeedService
+import baegteun.post.domain.feed.services.*
 import org.springframework.data.domain.Pageable
 import org.springframework.data.web.PageableDefault
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PatchMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -27,7 +25,8 @@ class FeedController(
     private val allFeedListService: AllFeedListService,
     private val detailFeedService: DetailFeedService,
     private val createFeedService: CreateFeedService,
-    private val updateFeedService: UpdateFeedService
+    private val updateFeedService: UpdateFeedService,
+    private val deleteFeedService: DeleteFeedService
 ) {
     @GetMapping("list")
     fun allFeedList(@PageableDefault(size = 5) pageable: Pageable): ResponseEntity<AllFeedListResponseDto> =
@@ -45,4 +44,7 @@ class FeedController(
     fun updateFeed(@NotBlank @PathVariable("id") id: Long, @Valid @RequestBody updateFeedRequestDto: UpdateFeedRequestDto): ResponseEntity<Void> =
         updateFeedService.execute(id, updateFeedRequestDto)
 
+    @DeleteMapping("{id}")
+    fun deleteFeed(@NotBlank @PathVariable("id") id: Long): ResponseEntity<Void> =
+        deleteFeedService.execute(id)
 }

@@ -24,7 +24,7 @@ class CreateFeedService(
     fun execute(req: CreateFeedRequestDto): ResponseEntity<Void> {
         val feed = Feed(req.title, req.content, userUtil.fetchCurrentUser())
         feedRepository.save(feed)
-        req.imageUrls.forEach { feedImageRepository.save(FeedImage(it, feed)) }
+        feedImageRepository.saveAll(req.imageUrls.map { FeedImage(it, feed) })
         hitRepository.save(Hit(feed.id, 0))
         return ResponseEntity(HttpStatus.CREATED)
     }

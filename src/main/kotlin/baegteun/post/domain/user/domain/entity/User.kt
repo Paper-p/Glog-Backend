@@ -1,12 +1,9 @@
 package baegteun.post.domain.user.domain.entity
 
+import baegteun.post.domain.feed.domain.entity.Feed
 import baegteun.post.infrastructure.image.DefaultImage
 import org.hibernate.annotations.ColumnDefault
-import javax.persistence.Column
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
+import javax.persistence.*
 import javax.validation.constraints.NotNull
 import javax.validation.constraints.Size
 
@@ -29,7 +26,10 @@ class User(
     @field:NotNull
     @field:Size(max = 100)
     @ColumnDefault(DefaultImage.PROFILE_IMAGE)
-    var profileImageUrl: String
+    var profileImageUrl: String,
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = [CascadeType.REMOVE])
+    var feeds: List<Feed> = listOf()
 ) {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
