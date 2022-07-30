@@ -30,7 +30,6 @@ class SecurityConfig(
         http
             .csrf().disable()
             .formLogin().disable()
-            .cors().disable()
 
             .sessionManagement()
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
