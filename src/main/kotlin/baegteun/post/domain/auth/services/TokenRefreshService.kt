@@ -20,7 +20,6 @@ class TokenRefreshService(
     private val userUtil: UserUtil,
     private val jwtTokenProvider: JwtTokenProvider,
     private val refreshTokenRepository: RefreshTokenRepository,
-    private val passwordEncoder: PasswordEncoder
 ) {
     fun execute(refreshToken: String): ResponseEntity<TokenRefreshResponseDto> {
         val userId = jwtTokenProvider.exactUserIdFromRefreshToken(refreshToken)

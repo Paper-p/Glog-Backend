@@ -43,6 +43,6 @@ class AuthController(
         checkNicknameExistService.execute(nickname)
 
     @PutMapping
-    fun tokenRefresh(@RequestHeader("Refresh-Token") refreshToken: String): ResponseEntity<TokenRefreshResponseDto> =
+    fun tokenRefresh(@RequestHeader("RefreshToken") refreshToken: String): ResponseEntity<TokenRefreshResponseDto> =
         tokenRefreshService.execute(refreshToken)
 }
