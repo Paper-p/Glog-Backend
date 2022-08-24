@@ -1,6 +1,5 @@
 package baegteun.post.domain.feed.services
 
-import baegteun.post.domain.feed.domain.repository.FeedImageRepository
 import baegteun.post.domain.feed.domain.repository.FeedRepository
 import baegteun.post.domain.feed.exception.NotOwnerTheFeedException
 import baegteun.post.domain.feed.utils.FeedUtil
