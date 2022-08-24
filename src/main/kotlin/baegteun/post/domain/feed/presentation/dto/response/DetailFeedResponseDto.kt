@@ -1,7 +1,6 @@
 package baegteun.post.domain.feed.presentation.dto.response
 
 import baegteun.post.domain.feed.domain.entity.Feed
-import baegteun.post.domain.user.domain.entity.User
 import com.fasterxml.jackson.annotation.JsonFormat
 import java.time.ZoneId
 import java.time.ZonedDateTime
@@ -15,7 +14,7 @@ data class DetailFeedResponseDto(
     val createdAt: ZonedDateTime,
     val hit: Int,
     val likeCount: Int,
-    val isLike: Boolean,
+    val isLiked: Boolean,
     val tagList: List<String>,
     val author: AuthorDto,
     val isMine: Boolean
