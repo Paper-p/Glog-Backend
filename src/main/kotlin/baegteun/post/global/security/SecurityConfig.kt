@@ -53,6 +53,8 @@ class SecurityConfig(
             .antMatchers(HttpMethod.POST, "/feed").authenticated()
             .antMatchers(HttpMethod.PATCH, "/feed/{id}").authenticated()
             .antMatchers(HttpMethod.DELETE, "/feed/{id}").authenticated()
+            .antMatchers(HttpMethod.POST, "/feed/like/{id}").authenticated()
+            .antMatchers(HttpMethod.DELETE, "/feed/like/{id}").authenticated()
 
             // image
             .antMatchers(HttpMethod.POST, "/image").authenticated()
