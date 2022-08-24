@@ -28,6 +28,9 @@ class TokenRefreshService(
 
         val redisRefreshToken = refreshTokenRepository.findById(userId).orElseThrow { RefreshTokenNotFoundException.EXCEPTION }
 
+        if (!Objects.equals(refreshToken, redisRefreshToken.token))
+            throw RefreshTokenNotFoundException.EXCEPTION
+
         val access = jwtTokenProvider.generateAccessToken(userId)
         val refresh = jwtTokenProvider.generateRefreshToken(userId)
         val expiredAt = jwtTokenProvider.getExpiredTime()
