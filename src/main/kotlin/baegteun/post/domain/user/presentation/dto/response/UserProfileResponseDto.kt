@@ -1,6 +1,5 @@
 package baegteun.post.domain.user.presentation.dto.response
 
-import baegteun.post.domain.feed.domain.entity.Feed
 import baegteun.post.domain.feed.presentation.dto.response.FeedListDto
 import baegteun.post.domain.user.domain.entity.User
 
