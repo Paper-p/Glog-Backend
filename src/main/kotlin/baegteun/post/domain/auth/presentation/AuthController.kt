@@ -6,6 +6,7 @@ import baegteun.post.domain.auth.presentation.dto.response.SigninResponseDto
 import baegteun.post.domain.auth.presentation.dto.response.TokenRefreshResponseDto
 import baegteun.post.domain.auth.services.*
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.PatchMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -42,7 +43,7 @@ class AuthController(
     fun checkNicknameExist(@NotBlank @RequestParam nickname: String): ResponseEntity<Void> =
         checkNicknameExistService.execute(nickname)
 
-    @PutMapping
+    @PatchMapping
     fun tokenRefresh(@RequestHeader("RefreshToken") refreshToken: String): ResponseEntity<TokenRefreshResponseDto> =
         tokenRefreshService.execute(refreshToken)
 }
