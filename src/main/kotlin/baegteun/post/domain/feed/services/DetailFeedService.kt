@@ -30,7 +30,7 @@ class DetailFeedService(
         hitRepository.save(hit)
         val user = userUtil.fetchCurrentUser()
         val likeCount = heartRepository.countByFeed(feed)
-        val isLiked = heartRepository.existsByUser(user)
+        val isLiked = heartRepository.existsByUserAndFeed(user, feed)
         val tagList = tagRepository.findAllByFeed(feed).map { it.title }
         val isMine = Objects.equals(feed.user.id, user.id)
 

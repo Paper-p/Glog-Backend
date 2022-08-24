@@ -27,7 +27,9 @@ class FeedController(
     private val detailFeedService: DetailFeedService,
     private val createFeedService: CreateFeedService,
     private val updateFeedService: UpdateFeedService,
-    private val deleteFeedService: DeleteFeedService
+    private val deleteFeedService: DeleteFeedService,
+    private val likeFeedService: LikeFeedService,
+    private val revokeLikeFeedService: RevokeLikeFeedService
 ) {
     @GetMapping("list")
     fun feedList(
@@ -51,4 +53,12 @@ class FeedController(
     @DeleteMapping("{id}")
     fun deleteFeed(@NotBlank @PathVariable("id") id: Long): ResponseEntity<Void> =
         deleteFeedService.execute(id)
+
+    @PostMapping("like/{id}")
+    fun likeFeed(@NotBlank @PathVariable("id") id: Long): ResponseEntity<Void> =
+        likeFeedService.execute(id)
+
+    @DeleteMapping("like/{id}")
+    fun revokeLikeFeed(@NotBlank @PathVariable("id") id: Long): ResponseEntity<Void> =
+        revokeLikeFeedService.execute(id)
 }

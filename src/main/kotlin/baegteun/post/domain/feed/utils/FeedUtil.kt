@@ -8,4 +8,5 @@ interface FeedUtil {
     fun fetchFeedById(id: Long): Feed
     fun fetchFeedListByUser(user: User): List<FeedListDto>
     fun feedListToDto(feed: List<Feed>): List<FeedListDto>
+    fun feedLikeToggle(id: Long, liked: Boolean)
 }

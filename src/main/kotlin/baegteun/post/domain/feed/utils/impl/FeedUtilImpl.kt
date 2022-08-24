@@ -7,6 +7,7 @@ import baegteun.post.domain.feed.domain.repository.FeedRepository
 import baegteun.post.domain.feed.exception.FeedNotFoundException
 import baegteun.post.domain.feed.presentation.dto.response.FeedListDto
 import baegteun.post.domain.feed.utils.FeedUtil
+import baegteun.post.domain.heart.domain.entity.Heart
 import baegteun.post.domain.heart.domain.repository.HeartRepository
 import baegteun.post.domain.hit.domain.repository.HitRepository
 import baegteun.post.domain.tag.domain.repository.TagRepository
@@ -38,7 +39,7 @@ class FeedUtilImpl(
             val isHeart = if (SecurityContextHolder.getContext().authentication.name == null) {
                 false
             } else {
-                heartRepository.existsByUser(userUtil.fetchCurrentUser())
+                heartRepository.existsByUserAndFeed(userUtil.fetchCurrentUser(), it)
             }
             FeedListDto(
                 it,
@@ -48,4 +49,20 @@ class FeedUtilImpl(
                 tagRepository.findAllByFeed(it).map { tag -> tag.title }
             )
         }
+
+    override fun feedLikeToggle(id: Long, liked: Boolean) {
+        val user = userUtil.fetchCurrentUser()
+        val feed = feedRepository.findById(id)
+            .orElseThrow { FeedNotFoundException.EXCEPTION }
+        if (liked) {
+            if (!heartRepository.existsByUserAndFeed(user, feed))
+                heartRepository.save(Heart(feed, user))
+        } else {
+            val heart = heartRepository.findByUserAndFeed(user, feed)
+            if (heart != null) {
+                heartRepository.delete(heart)
+            }
+        }
+
+    }
 }
