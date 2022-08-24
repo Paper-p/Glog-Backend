@@ -11,7 +11,7 @@ class FeedImage(
     @field:Size(max = 255)
     val url: String,
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = [CascadeType.REMOVE])
+    @ManyToOne(fetch = FetchType.LAZY, cascade = [CascadeType.REMOVE])
     @JoinColumn(name = "feed_id")
     val feed: Feed
 ): BaseIdEntity()
