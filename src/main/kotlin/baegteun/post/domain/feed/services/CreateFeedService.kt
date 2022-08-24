@@ -5,6 +5,8 @@ import baegteun.post.domain.feed.domain.entity.FeedImage
 import baegteun.post.domain.feed.domain.repository.FeedImageRepository
 import baegteun.post.domain.feed.domain.repository.FeedRepository
 import baegteun.post.domain.feed.presentation.dto.request.CreateFeedRequestDto
+import baegteun.post.domain.heart.domain.entity.Heart
+import baegteun.post.domain.heart.domain.repository.HeartRepository
 import baegteun.post.domain.hit.domain.entity.Hit
 import baegteun.post.domain.hit.domain.repository.HitRepository
 import baegteun.post.domain.user.utils.UserUtil
@@ -22,7 +24,8 @@ class CreateFeedService(
     private val userUtil: UserUtil
 ) {
     fun execute(req: CreateFeedRequestDto): ResponseEntity<Void> {
-        val feed = Feed(req.title, req.content, userUtil.fetchCurrentUser())
+        val user = userUtil.fetchCurrentUser()
+        val feed = Feed(req.title, req.content, user)
         feedRepository.save(feed)
         feedImageRepository.saveAll(req.imageUrls.map { FeedImage(it, feed) })
         hitRepository.save(Hit(feed.id, 0))
