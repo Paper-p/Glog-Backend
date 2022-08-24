@@ -1,7 +1,7 @@
 package baegteun.post.domain.feed.domain.entity
 
+import baegteun.post.domain.tag.domain.entity.Tag
 import baegteun.post.domain.user.domain.entity.User
-import baegteun.post.global.entity.BaseTimeEntity
 import baegteun.post.global.entity.BaseTimeIdEntity
 import javax.persistence.*
 
@@ -18,7 +18,10 @@ class Feed(
     val user: User,
 
     @OneToMany(mappedBy = "feed", fetch = FetchType.LAZY, cascade = [CascadeType.REMOVE])
-    var feedImages: List<FeedImage> = listOf()
+    var feedImages: List<FeedImage> = listOf(),
+
+    @OneToMany(mappedBy = "feed", fetch = FetchType.LAZY, cascade = [CascadeType.REMOVE])
+    var tags: List<Tag> = listOf()
 ): BaseTimeIdEntity() {
     fun update(title: String, content: String) {
         this.title = title
