@@ -45,7 +45,7 @@ class SecurityConfig(
             .antMatchers(HttpMethod.POST, "/auth/signin").permitAll()
             .antMatchers(HttpMethod.HEAD, "/auth/valid-id").permitAll()
             .antMatchers(HttpMethod.HEAD, "/auth/valid-name").permitAll()
-            .antMatchers(HttpMethod.PUT, "/auth").permitAll()
+            .antMatchers(HttpMethod.PATCH, "/auth").permitAll()
 
             // feed
             .antMatchers(HttpMethod.GET, "/feed/list").permitAll()
