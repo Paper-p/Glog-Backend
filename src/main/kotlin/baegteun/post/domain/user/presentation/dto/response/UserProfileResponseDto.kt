@@ -10,10 +10,10 @@ data class UserProfileResponseDto(
     val profileImageUrl: String,
     val feedList: List<FeedListDto>
 ) {
-    constructor(user: User, feeds: List<Feed>): this(
+    constructor(user: User, feeds: List<FeedListDto>): this(
         user.userId,
         user.nickname,
         user.profileImageUrl,
-        feeds.map { FeedListDto(it) }
+        feeds
     )
 }
