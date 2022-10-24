@@ -17,14 +17,14 @@ class Feed(
     @JoinColumn(name = "user_id", nullable = false,)
     val user: User,
 
-    @OneToMany(mappedBy = "feed", fetch = FetchType.LAZY, cascade = [CascadeType.REMOVE])
-    var feedImages: List<FeedImage> = listOf(),
+    var thumbnail: String?,
 
     @OneToMany(mappedBy = "feed", fetch = FetchType.LAZY, cascade = [CascadeType.REMOVE])
     var tags: List<Tag> = listOf()
 ): BaseTimeIdEntity() {
-    fun update(title: String, content: String) {
+    fun update(title: String, content: String, thumbnail: String?) {
         this.title = title
         this.content = content
+        this.thumbnail = thumbnail
     }
 }

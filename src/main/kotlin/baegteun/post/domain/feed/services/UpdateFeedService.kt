@@ -1,7 +1,5 @@
 package baegteun.post.domain.feed.services
 
-import baegteun.post.domain.feed.domain.entity.FeedImage
-import baegteun.post.domain.feed.domain.repository.FeedImageRepository
 import baegteun.post.domain.feed.exception.NotOwnerTheFeedException
 import baegteun.post.domain.feed.presentation.dto.request.UpdateFeedRequestDto
 import baegteun.post.domain.feed.utils.FeedUtil
@@ -19,7 +17,6 @@ import java.util.Objects
 class UpdateFeedService(
     private val feedUtil: FeedUtil,
     private val userUtil: UserUtil,
-    private val feedImageRepository: FeedImageRepository,
     private val tagRepository: TagRepository
 ) {
     fun execute(feedId: Long, req: UpdateFeedRequestDto): ResponseEntity<Void> {
@@ -28,21 +25,13 @@ class UpdateFeedService(
         if (!Objects.equals(feed.user.id, userUtil.fetchCurrentUser().id))
             throw NotOwnerTheFeedException.EXCEPTION
 
-        feed.update(req.title, req.content)
+        feed.update(req.title, req.content, req.thumbnail)
 
         val removedTag = feed.tags.filter { !req.tags.contains(it.title) }
         tagRepository.deleteAll(removedTag)
 
         val addedTag = req.tags.filter { new -> !feed.tags.map { it.title }.contains(new) }
         tagRepository.saveAll(addedTag.distinct().map { Tag(it, feed) })
-
-        val feedImages = feed.feedImages
-
-        val removedImages = feedImages.filter { !req.imageUrls.contains(it.url) }
-        feedImageRepository.deleteAll(removedImages)
-
-        val addedImages = req.imageUrls.filter { new -> !feedImages.map { it.url }.contains(new) }
-        feedImageRepository.saveAll(addedImages.map { FeedImage(it, feed) })
 
         return ResponseEntity(HttpStatus.NO_CONTENT)
     }

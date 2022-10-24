@@ -1,8 +1,6 @@
 package baegteun.post.domain.feed.utils.impl
 
 import baegteun.post.domain.feed.domain.entity.Feed
-import baegteun.post.domain.feed.domain.entity.FeedImage
-import baegteun.post.domain.feed.domain.repository.FeedImageRepository
 import baegteun.post.domain.feed.domain.repository.FeedRepository
 import baegteun.post.domain.feed.exception.FeedNotFoundException
 import baegteun.post.domain.feed.presentation.dto.response.FeedListDto

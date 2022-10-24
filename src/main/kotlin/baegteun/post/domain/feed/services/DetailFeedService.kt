@@ -24,7 +24,6 @@ class DetailFeedService(
 ) {
     fun execute(feedId: Long): ResponseEntity<DetailFeedResponseDto> {
         val feed = feedUtil.fetchFeedById(feedId)
-        val feedImages = feed.feedImages
         val hit = hitRepository.findById(feedId).orElseGet { Hit(feedId, 0) }
         hit.increaseHitCount()
         hitRepository.save(hit)
@@ -36,7 +35,7 @@ class DetailFeedService(
 
         val response = DetailFeedResponseDto(
             feed,
-            feedImages.map { it.url },
+            feed.thumbnail,
             hit.hitCount,
             likeCount,
             isLiked,

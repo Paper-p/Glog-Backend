@@ -9,7 +9,7 @@ data class DetailFeedResponseDto(
     val id: Long,
     val title: String,
     val content: String,
-    val imageUrls: List<String>,
+    val thumbnail: String?,
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
     val createdAt: ZonedDateTime,
     val hit: Int,
@@ -21,7 +21,7 @@ data class DetailFeedResponseDto(
 ) {
     constructor(
         feed: Feed,
-        imageUrls: List<String>,
+        thumbnail: String?,
         hitCount: Int,
         likeCount: Int,
         isLike: Boolean,
@@ -31,7 +31,7 @@ data class DetailFeedResponseDto(
         feed.id,
         feed.title,
         feed.content,
-        imageUrls,
+        thumbnail,
         feed.createdAt.atZone(ZoneId.of("Asia/Seoul")),
         hitCount,
         likeCount,

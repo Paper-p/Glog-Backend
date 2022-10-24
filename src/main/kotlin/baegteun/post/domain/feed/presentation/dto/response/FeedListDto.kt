@@ -22,7 +22,7 @@ data class FeedListDto(
         feed.id,
         feed.title,
         feed.createdAt.atZone(ZoneId.of("Asia/Seoul")),
-        feed.feedImages.firstOrNull()?.url,
+        feed.thumbnail,
         feed.content.substring(0..min(64, feed.content.length)),
         hit,
         likeCount,

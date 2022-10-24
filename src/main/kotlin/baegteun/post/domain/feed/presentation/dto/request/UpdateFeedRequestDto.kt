@@ -12,8 +12,7 @@ data class UpdateFeedRequestDto(
     @field:Size(min = 1)
     val content: String,
 
-    @field:Size(max = 5)
-    val imageUrls: List<String>,
+    val thumbnail: String?,
 
     val tags: List<String>
 )
