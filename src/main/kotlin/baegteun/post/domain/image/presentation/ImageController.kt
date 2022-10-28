@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.multipart.MultipartFile
+import javax.validation.Valid
+import javax.validation.constraints.NotNull
 
 @RestController
 @RequestMapping("image")
@@ -14,6 +16,6 @@ class ImageController(
     private val uploadImageService: UploadImageService
 ) {
     @PostMapping
-    fun uploadImage(image: MultipartFile): ResponseEntity<UploadImageResponseDto> =
+    fun uploadImage(@Valid @NotNull image: MultipartFile): ResponseEntity<UploadImageResponseDto> =
         uploadImageService.execute(image)
 }
