@@ -12,6 +12,7 @@ import baegteun.post.domain.tag.domain.repository.TagRepository
 import baegteun.post.domain.user.domain.entity.User
 import baegteun.post.domain.user.utils.UserUtil
 import org.springframework.security.core.context.SecurityContextHolder
+import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.stereotype.Component
 
 @Component
@@ -28,13 +29,12 @@ class FeedUtilImpl(
     override fun fetchFeedListByUser(user: User): List<FeedListDto> =
         feedListToDto(user.feeds)
 
-
     override fun feedListToDto(feeds: List<Feed>): List<FeedListDto> =
         feeds.map {
             val hit = hitRepository.findById(it.id)
                 .orElseThrow { FeedNotFoundException.EXCEPTION }
             val heartCount = heartRepository.countByFeed(it)
-            val isHeart = if (SecurityContextHolder.getContext().authentication.name == null) {
+            val isHeart = if (SecurityContextHolder.getContext().authentication.principal !is UserDetails) {
                 false
             } else {
                 heartRepository.existsByUserAndFeed(userUtil.fetchCurrentUser(), it)
