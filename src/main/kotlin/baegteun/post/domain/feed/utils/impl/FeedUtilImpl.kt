@@ -10,7 +10,9 @@ import baegteun.post.domain.heart.domain.repository.HeartRepository
 import baegteun.post.domain.hit.domain.repository.HitRepository
 import baegteun.post.domain.tag.domain.repository.TagRepository
 import baegteun.post.domain.user.domain.entity.User
+import baegteun.post.domain.user.exception.UserNotFoundException
 import baegteun.post.domain.user.utils.UserUtil
+import baegteun.post.global.error.exception.PaperException
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.stereotype.Component
@@ -34,10 +36,10 @@ class FeedUtilImpl(
             val hit = hitRepository.findById(it.id)
                 .orElseThrow { FeedNotFoundException.EXCEPTION }
             val heartCount = heartRepository.countByFeed(it)
-            val isHeart = if (SecurityContextHolder.getContext().authentication.principal !is UserDetails) {
-                false
-            } else {
+            val isHeart = try {
                 heartRepository.existsByUserAndFeed(userUtil.fetchCurrentUser(), it)
+            } catch (e: Exception) {
+                false
             }
             FeedListDto(
                 it,
