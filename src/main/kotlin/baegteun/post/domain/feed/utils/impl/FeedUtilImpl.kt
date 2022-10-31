@@ -5,8 +5,8 @@ import baegteun.post.domain.feed.domain.repository.FeedRepository
 import baegteun.post.domain.feed.exception.FeedNotFoundException
 import baegteun.post.domain.feed.presentation.dto.response.FeedListDto
 import baegteun.post.domain.feed.utils.FeedUtil
-import baegteun.post.domain.heart.domain.entity.Heart
-import baegteun.post.domain.heart.domain.repository.HeartRepository
+import baegteun.post.domain.feed.domain.entity.Heart
+import baegteun.post.domain.feed.domain.repository.HeartRepository
 import baegteun.post.domain.feed.domain.repository.HitRepository
 import baegteun.post.domain.feed.domain.repository.TagRepository
 import baegteun.post.domain.user.domain.entity.User

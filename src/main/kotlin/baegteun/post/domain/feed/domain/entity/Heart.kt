@@ -1,4 +1,4 @@
-package baegteun.post.domain.heart.domain.entity
+package baegteun.post.domain.feed.domain.entity
 
 import baegteun.post.domain.feed.domain.entity.Feed
 import baegteun.post.domain.user.domain.entity.User

@@ -2,7 +2,7 @@ package baegteun.post.domain.feed.services
 
 import baegteun.post.domain.feed.presentation.dto.response.DetailFeedResponseDto
 import baegteun.post.domain.feed.utils.FeedUtil
-import baegteun.post.domain.heart.domain.repository.HeartRepository
+import baegteun.post.domain.feed.domain.repository.HeartRepository
 import baegteun.post.domain.feed.domain.entity.Hit
 import baegteun.post.domain.feed.domain.repository.HitRepository
 import baegteun.post.domain.feed.domain.repository.TagRepository

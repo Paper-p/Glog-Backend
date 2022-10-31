@@ -3,7 +3,7 @@ package baegteun.post.domain.feed.services
 import baegteun.post.domain.feed.domain.repository.FeedRepository
 import baegteun.post.domain.feed.exception.NotOwnerTheFeedException
 import baegteun.post.domain.feed.utils.FeedUtil
-import baegteun.post.domain.heart.domain.repository.HeartRepository
+import baegteun.post.domain.feed.domain.repository.HeartRepository
 import baegteun.post.domain.feed.domain.repository.HitRepository
 import baegteun.post.domain.feed.domain.repository.TagRepository
 import baegteun.post.domain.user.utils.UserUtil
