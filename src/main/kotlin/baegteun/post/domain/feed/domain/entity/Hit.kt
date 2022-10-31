@@ -1,4 +1,4 @@
-package baegteun.post.domain.hit.domain.entity
+package baegteun.post.domain.feed.domain.entity
 
 import org.springframework.data.annotation.Id
 import org.springframework.data.redis.core.RedisHash

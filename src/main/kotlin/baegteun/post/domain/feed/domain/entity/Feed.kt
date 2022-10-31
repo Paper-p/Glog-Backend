@@ -1,6 +1,5 @@
 package baegteun.post.domain.feed.domain.entity
 
-import baegteun.post.domain.tag.domain.entity.Tag
 import baegteun.post.domain.user.domain.entity.User
 import baegteun.post.global.entity.BaseTimeIdEntity
 import javax.persistence.*

@@ -3,10 +3,10 @@ package baegteun.post.domain.feed.services
 import baegteun.post.domain.feed.domain.entity.Feed
 import baegteun.post.domain.feed.domain.repository.FeedRepository
 import baegteun.post.domain.feed.presentation.dto.request.CreateFeedRequestDto
-import baegteun.post.domain.hit.domain.entity.Hit
-import baegteun.post.domain.hit.domain.repository.HitRepository
-import baegteun.post.domain.tag.domain.entity.Tag
-import baegteun.post.domain.tag.domain.repository.TagRepository
+import baegteun.post.domain.feed.domain.entity.Hit
+import baegteun.post.domain.feed.domain.repository.HitRepository
+import baegteun.post.domain.feed.domain.entity.Tag
+import baegteun.post.domain.feed.domain.repository.TagRepository
 import baegteun.post.domain.user.utils.UserUtil
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity

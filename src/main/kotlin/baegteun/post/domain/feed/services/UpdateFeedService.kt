@@ -3,8 +3,8 @@ package baegteun.post.domain.feed.services
 import baegteun.post.domain.feed.exception.NotOwnerTheFeedException
 import baegteun.post.domain.feed.presentation.dto.request.UpdateFeedRequestDto
 import baegteun.post.domain.feed.utils.FeedUtil
-import baegteun.post.domain.tag.domain.entity.Tag
-import baegteun.post.domain.tag.domain.repository.TagRepository
+import baegteun.post.domain.feed.domain.entity.Tag
+import baegteun.post.domain.feed.domain.repository.TagRepository
 import baegteun.post.domain.user.utils.UserUtil
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity

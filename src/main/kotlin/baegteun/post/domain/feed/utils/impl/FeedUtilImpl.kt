@@ -7,14 +7,10 @@ import baegteun.post.domain.feed.presentation.dto.response.FeedListDto
 import baegteun.post.domain.feed.utils.FeedUtil
 import baegteun.post.domain.heart.domain.entity.Heart
 import baegteun.post.domain.heart.domain.repository.HeartRepository
-import baegteun.post.domain.hit.domain.repository.HitRepository
-import baegteun.post.domain.tag.domain.repository.TagRepository
+import baegteun.post.domain.feed.domain.repository.HitRepository
+import baegteun.post.domain.feed.domain.repository.TagRepository
 import baegteun.post.domain.user.domain.entity.User
-import baegteun.post.domain.user.exception.UserNotFoundException
 import baegteun.post.domain.user.utils.UserUtil
-import baegteun.post.global.error.exception.PaperException
-import org.springframework.security.core.context.SecurityContextHolder
-import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.stereotype.Component
 
 @Component

@@ -1,4 +1,4 @@
-package baegteun.post.domain.tag.domain.entity
+package baegteun.post.domain.feed.domain.entity
 
 import baegteun.post.domain.feed.domain.entity.Feed
 import baegteun.post.global.entity.BaseIdEntity
