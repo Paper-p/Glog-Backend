@@ -1,5 +1,6 @@
 package baegteun.post.domain.feed.presentation.dto.response
 
+import baegteun.post.domain.comment.domain.entity.Comment
 import baegteun.post.domain.feed.domain.entity.Feed
 import com.fasterxml.jackson.annotation.JsonFormat
 import java.time.ZoneId
@@ -16,6 +17,7 @@ data class DetailFeedResponseDto(
     val likeCount: Int,
     val isLiked: Boolean,
     val tagList: List<String>,
+    val comments: List<SingleCommentDto>,
     val author: AuthorDto,
     val isMine: Boolean
 ) {
@@ -26,6 +28,7 @@ data class DetailFeedResponseDto(
         likeCount: Int,
         isLike: Boolean,
         tagList: List<String>,
+        comments: List<Comment>,
         isMine: Boolean
     ): this(
         feed.id,
@@ -37,6 +40,7 @@ data class DetailFeedResponseDto(
         likeCount,
         isLike,
         tagList,
+        comments.map { SingleCommentDto(it) },
         AuthorDto(feed.user),
         isMine
     )

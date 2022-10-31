@@ -15,10 +15,12 @@ enum class ErrorCode(val status: Int, val message: String) {
     UNAUTHORIZED(401, "Unauthorized"),
 
     NOT_OWNER_THE_FEED(403, "Not owner the feed"),
+    NOT_OWNER_THE_COMMENT(403, "Not owner the comment"),
 
     USER_NOT_FOUND(404, "User Not Found"),
     REFRESH_TOKEN_NOT_FOUND(404, "RefreshToken Not Found"),
     FEED_NOT_FOUND(404, "Feed Not Found"),
+    COMMENT_NOT_FOUND(404, "Comment Not Found"),
 
     AlreadyExistUserId(409, "UserId is already exist"),
     AlreadyExistNickname(409, "Nickname is already exist"),

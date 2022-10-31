@@ -1,5 +1,6 @@
 package baegteun.post.domain.feed.utils.impl
 
+import baegteun.post.domain.comment.domain.repository.CommentRepository
 import baegteun.post.domain.feed.domain.entity.Feed
 import baegteun.post.domain.feed.domain.repository.FeedRepository
 import baegteun.post.domain.feed.exception.FeedNotFoundException
@@ -19,6 +20,7 @@ class FeedUtilImpl(
     private val hitRepository: HitRepository,
     private val heartRepository: HeartRepository,
     private val tagRepository: TagRepository,
+    private val commentRepository: CommentRepository,
     private val userUtil: UserUtil
 ): FeedUtil {
     override fun fetchFeedById(id: Long): Feed =
@@ -32,6 +34,7 @@ class FeedUtilImpl(
             val hit = hitRepository.findById(it.id)
                 .orElseThrow { FeedNotFoundException.EXCEPTION }
             val heartCount = heartRepository.countByFeed(it)
+            val commentCount = commentRepository.countByFeed(it)
             val isHeart = try {
                 heartRepository.existsByUserAndFeed(userUtil.fetchCurrentUser(), it)
             } catch (e: Exception) {
@@ -41,6 +44,7 @@ class FeedUtilImpl(
                 it,
                 hit.hitCount,
                 heartCount,
+                commentCount,
                 isHeart,
                 tagRepository.findAllByFeed(it).map { tag -> tag.title }
             )

@@ -15,17 +15,26 @@ data class FeedListDto(
     val previewContent: String,
     val hit: Int,
     val likeCount: Int,
+    val commentCount: Int,
     val isLiked: Boolean,
     val tagList: List<String>
 ) {
-    constructor(feed: Feed, hit: Int, likeCount: Int, isLiked: Boolean, tagList: List<String>): this(
+    constructor(
+        feed: Feed,
+        hit: Int,
+        likeCount: Int,
+        commentCount: Int,
+        isLiked: Boolean,
+        tagList: List<String>
+    ): this(
         feed.id,
         feed.title,
         feed.createdAt.atZone(ZoneId.of("Asia/Seoul")),
         feed.thumbnail,
-        feed.content.substring(0..min(64, feed.content.length)),
+        feed.content.substring(0 until min(64, feed.content.length - 1)),
         hit,
         likeCount,
+        commentCount,
         isLiked,
         tagList
     )
