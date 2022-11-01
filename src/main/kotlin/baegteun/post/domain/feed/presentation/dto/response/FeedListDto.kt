@@ -31,7 +31,7 @@ data class FeedListDto(
         feed.title,
         feed.createdAt.atZone(ZoneId.of("Asia/Seoul")),
         feed.thumbnail,
-        feed.content.substring(0 until min(64, feed.content.length - 1)),
+        feed.content.substring(0 until min(64, feed.content.length)),
         hit,
         likeCount,
         commentCount,
