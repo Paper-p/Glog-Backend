@@ -17,6 +17,7 @@ class Feed(
     @JoinColumn(name = "user_id", nullable = false,)
     val user: User,
 
+    @Column(columnDefinition = "VARCHAR(2048)")
     var thumbnail: String?,
 
     @OneToMany(mappedBy = "feed", fetch = FetchType.LAZY, cascade = [CascadeType.REMOVE])
