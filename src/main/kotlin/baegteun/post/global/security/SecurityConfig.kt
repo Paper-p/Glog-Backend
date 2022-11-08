@@ -49,7 +49,7 @@ class SecurityConfig(
 
             // feed
             .antMatchers(HttpMethod.GET, "/feed/list").permitAll()
-            .antMatchers(HttpMethod.GET, "/feed/{id}").authenticated()
+            .antMatchers(HttpMethod.GET, "/feed/{id}").permitAll()
             .antMatchers(HttpMethod.POST, "/feed").authenticated()
             .antMatchers(HttpMethod.PATCH, "/feed/{id}").authenticated()
             .antMatchers(HttpMethod.DELETE, "/feed/{id}").authenticated()

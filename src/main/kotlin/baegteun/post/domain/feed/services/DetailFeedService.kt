@@ -7,6 +7,7 @@ import baegteun.post.domain.feed.domain.repository.HeartRepository
 import baegteun.post.domain.feed.domain.entity.Hit
 import baegteun.post.domain.feed.domain.repository.HitRepository
 import baegteun.post.domain.feed.domain.repository.TagRepository
+import baegteun.post.domain.user.domain.entity.User
 import baegteun.post.domain.user.utils.UserUtil
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -30,12 +31,16 @@ class DetailFeedService(
         hit.increaseHitCount()
         hitRepository.save(hit)
 
-        val user = userUtil.fetchCurrentUser()
+        val user: User? = try {
+            userUtil.fetchCurrentUser()
+        } catch (e: Exception) {
+            null
+        }
         val likeCount = heartRepository.countByFeed(feed)
-        val isLiked = heartRepository.existsByUserAndFeed(user, feed)
+        val isLiked = if(user != null) heartRepository.existsByUserAndFeed(user, feed) else false
         val tagList = tagRepository.findAllByFeed(feed).map { it.title }
         val comments = commentRepository.findAllByFeed(feed)
-        val isMine = Objects.equals(feed.user.id, user.id)
+        val isMine = if(user != null) Objects.equals(feed.user.id, user.id) else false
 
         val response = DetailFeedResponseDto(
             feed,
