@@ -28,7 +28,7 @@ data class DetailFeedResponseDto(
         likeCount: Int,
         isLike: Boolean,
         tagList: List<String>,
-        comments: List<Comment>,
+        comments: List<SingleCommentDto>,
         isMine: Boolean
     ): this(
         feed.id,
@@ -40,7 +40,7 @@ data class DetailFeedResponseDto(
         likeCount,
         isLike,
         tagList,
-        comments.map { SingleCommentDto(it) },
+        comments,
         AuthorDto(feed.user),
         isMine
     )

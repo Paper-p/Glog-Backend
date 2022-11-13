@@ -9,11 +9,13 @@ data class SingleCommentDto(
     val author: AuthorDto,
     val content: String,
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
-    val createdAt: ZonedDateTime
+    val createdAt: ZonedDateTime,
+    var isMine: Boolean
 ) {
-    constructor(comment: Comment): this(
+    constructor(comment: Comment, isMine: Boolean): this(
         AuthorDto(comment.createdBy),
         comment.content,
-        comment.createdAt.atZone(ZoneId.of("Asia/Seoul"))
+        comment.createdAt.atZone(ZoneId.of("Asia/Seoul")),
+        isMine
     )
 }
