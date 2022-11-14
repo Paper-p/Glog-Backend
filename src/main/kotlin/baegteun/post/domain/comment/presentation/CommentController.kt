@@ -5,16 +5,12 @@ import baegteun.post.domain.comment.presentation.dto.request.UpdateCommentReques
 import baegteun.post.domain.comment.services.CreateCommentService
 import baegteun.post.domain.comment.services.DeleteCommentService
 import baegteun.post.domain.comment.services.UpdateCommentService
-import org.springframework.web.bind.annotation.DeleteMapping
-import org.springframework.web.bind.annotation.PatchMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 import javax.validation.Valid
 import javax.validation.constraints.NotBlank
 
 @RestController
+@RequestMapping("comment")
 class CommentController(
     private val createCommentService: CreateCommentService,
     private val updateCommentService: UpdateCommentService,
