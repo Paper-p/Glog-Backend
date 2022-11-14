@@ -6,6 +6,7 @@ import java.time.ZoneId
 import java.time.ZonedDateTime
 
 data class SingleCommentDto(
+    val id: Long,
     val author: AuthorDto,
     val content: String,
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
@@ -13,6 +14,7 @@ data class SingleCommentDto(
     var isMine: Boolean
 ) {
     constructor(comment: Comment, isMine: Boolean): this(
+        comment.id,
         AuthorDto(comment.createdBy),
         comment.content,
         comment.createdAt.atZone(ZoneId.of("Asia/Seoul")),
