@@ -2,10 +2,8 @@ package baegteun.post.domain.user.presentation
 
 import baegteun.post.domain.user.presentation.dto.request.UpdateProfileImageRequestDto
 import baegteun.post.domain.user.presentation.dto.response.MyMiniProfileResponseDto
-import baegteun.post.domain.user.presentation.dto.response.MyProfileResponseDto
 import baegteun.post.domain.user.presentation.dto.response.UserProfileResponseDto
 import baegteun.post.domain.user.services.FetchMyMiniProfileService
-import baegteun.post.domain.user.services.FetchMyProfileService
 import baegteun.post.domain.user.services.FetchUserProfileService
 import baegteun.post.domain.user.services.UpdateProfileImageService
 import org.springframework.http.ResponseEntity
@@ -21,14 +19,10 @@ import javax.validation.constraints.NotBlank
 @RestController
 @RequestMapping("user")
 class UserController(
-    private val fetchMyProfileService: FetchMyProfileService,
     private val updateProfileImageService: UpdateProfileImageService,
     private val fetchUserProfileService: FetchUserProfileService,
     private val fetchMyMiniProfileService: FetchMyMiniProfileService
 ) {
-    @GetMapping("my")
-    fun fetchMyProfile(): ResponseEntity<MyProfileResponseDto> =
-        fetchMyProfileService.execute()
 
     @GetMapping("profile")
     fun fetchMyMiniProfile(): ResponseEntity<MyMiniProfileResponseDto> =
