@@ -7,12 +7,14 @@ data class UserProfileResponseDto(
     val userId: String,
     val nickname: String,
     val profileImageUrl: String,
-    val feedList: List<FeedListDto>
+    val feedList: List<FeedListDto>,
+    val isMine: Boolean
 ) {
-    constructor(user: User, feeds: List<FeedListDto>): this(
+    constructor(user: User, feeds: List<FeedListDto>, isMine: Boolean): this(
         user.userId,
         user.nickname,
         user.profileImageUrl,
-        feeds
+        feeds,
+        isMine
     )
 }

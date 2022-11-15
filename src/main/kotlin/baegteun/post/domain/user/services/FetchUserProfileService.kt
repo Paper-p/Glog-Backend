@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import java.util.Objects
 
 @Transactional(readOnly = true)
 @Service
@@ -16,9 +17,16 @@ class FetchUserProfileService(
 ) {
     fun execute(userId: String): ResponseEntity<UserProfileResponseDto> {
         val user = userUtil.fetchUserByUserId(userId)
+        val isMine: Boolean = try {
+            val currentUser = userUtil.fetchCurrentUser()
+            Objects.equals(currentUser.id, user.id)
+        } catch (e: Exception) {
+            false
+        }
         val response = UserProfileResponseDto(
             user,
-            feedUtil.fetchFeedListByUser(user)
+            feedUtil.fetchFeedListByUser(user),
+            isMine
         )
         return ResponseEntity(response, HttpStatus.OK)
     }
