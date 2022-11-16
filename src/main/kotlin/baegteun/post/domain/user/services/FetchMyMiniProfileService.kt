@@ -13,7 +13,7 @@ class FetchMyMiniProfileService(
     fun execute(): ResponseEntity<MyMiniProfileResponseDto> {
         val user = userUtil.fetchCurrentUser()
         val response = MyMiniProfileResponseDto(
-            userId = user.id,
+            userId = user.userId,
             nickname = user.nickname,
             profileImageUrl = user.profileImageUrl
         )
