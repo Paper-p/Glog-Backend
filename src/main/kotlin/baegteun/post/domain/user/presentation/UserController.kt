@@ -32,7 +32,7 @@ class UserController(
     fun updateProfileImage(@Valid @RequestBody updateProfileImageRequestDto: UpdateProfileImageRequestDto): ResponseEntity<Void> =
         updateProfileImageService.execute(updateProfileImageRequestDto)
 
-    @GetMapping("{userId}")
-    fun fetchUserProfile(@NotBlank @PathVariable("userId") userId: String): ResponseEntity<UserProfileResponseDto> =
-        fetchUserProfileService.execute(userId)
+    @GetMapping("{nickname}")
+    fun fetchUserProfile(@NotBlank @PathVariable("nickname") nickname: String): ResponseEntity<UserProfileResponseDto> =
+        fetchUserProfileService.execute(nickname)
 }

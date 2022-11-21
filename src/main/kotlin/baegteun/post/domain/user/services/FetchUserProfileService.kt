@@ -1,6 +1,8 @@
 package baegteun.post.domain.user.services
 
 import baegteun.post.domain.feed.utils.FeedUtil
+import baegteun.post.domain.user.domain.repository.UserRepository
+import baegteun.post.domain.user.exception.UserNotFoundException
 import baegteun.post.domain.user.presentation.dto.response.UserProfileResponseDto
 import baegteun.post.domain.user.utils.UserUtil
 import org.springframework.http.HttpStatus
@@ -13,10 +15,11 @@ import java.util.Objects
 @Service
 class FetchUserProfileService(
     private val userUtil: UserUtil,
-    private val feedUtil: FeedUtil
+    private val feedUtil: FeedUtil,
+    private val userRepository: UserRepository
 ) {
-    fun execute(userId: String): ResponseEntity<UserProfileResponseDto> {
-        val user = userUtil.fetchUserByUserId(userId)
+    fun execute(nickname: String): ResponseEntity<UserProfileResponseDto> {
+        val user = userRepository.findByNickname(nickname) ?: throw UserNotFoundException()
         val isMine: Boolean = try {
             val currentUser = userUtil.fetchCurrentUser()
             Objects.equals(currentUser.id, user.id)
