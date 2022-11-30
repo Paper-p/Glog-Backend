@@ -4,5 +4,5 @@ import baegteun.post.domain.feed.domain.entity.Hit
 import org.springframework.data.repository.CrudRepository
 
 interface HitRepository: CrudRepository<Hit, Long> {
-
+    fun findTop4ByOrderByHitCountDesc(): List<Hit>
 }

@@ -24,6 +24,7 @@ import javax.validation.constraints.NotBlank
 @RequestMapping("feed")
 class FeedController(
     private val feedListService: FeedListService,
+    private val hotFeedListService: HotFeedListService,
     private val detailFeedService: DetailFeedService,
     private val createFeedService: CreateFeedService,
     private val updateFeedService: UpdateFeedService,
@@ -37,6 +38,9 @@ class FeedController(
         @RequestParam("keyword") keyword: String?
     ): ResponseEntity<FeedListResponseDto> =
         feedListService.execute(pageable, keyword)
+
+    @GetMapping("hot")
+    fun hotFeedList() = hotFeedListService.execute()
 
     @GetMapping("{id}")
     fun detailFeed(@NotBlank @PathVariable("id") id: Long): ResponseEntity<DetailFeedResponseDto> =
