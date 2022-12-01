@@ -19,7 +19,7 @@ class FeedListService(
     private val feedUtil: FeedUtil
 ) {
     fun execute(pageable: Pageable, keyword: String?): ResponseEntity<FeedListResponseDto> {
-        val paging: PageRequest = PageRequest.of(pageable.pageNumber, pageable.pageSize, Sort.by(Sort.Order.asc("createdAt")))
+        val paging: PageRequest = PageRequest.of(pageable.pageNumber, pageable.pageSize, Sort.by(Sort.Order.desc("createdAt")))
         val list: List<Feed> = if (keyword == null) {
             feedRepository.findAll(paging).toList()
         } else {
