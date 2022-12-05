@@ -6,11 +6,11 @@ import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
-@Transactional(readOnly = true)
 @Service
 class CheckNicknameExistService(
     private val userUtil: UserUtil
 ) {
+    @Transactional(readOnly = true)
     fun execute(nickname: String): ResponseEntity<Void> {
         userUtil.checkExistsNickname(nickname)
         return ResponseEntity(HttpStatus.OK)

@@ -8,12 +8,12 @@ import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
-@Transactional(readOnly = true)
 @Service
 class HotFeedListService(
     private val hitRepository: HitRepository,
     private val feedUtil: FeedUtil
 ) {
+    @Transactional(readOnly = true)
     fun execute(): ResponseEntity<HotFeedListResponseDto> {
         val list = hitRepository.findTop4ByOrderByHitCountDesc()
             .map { feedUtil.fetchFeedById(it.feedId) }

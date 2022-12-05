@@ -16,7 +16,6 @@ import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.util.Objects
 
-@Transactional
 @Service
 class DetailFeedService(
     private val hitRepository: HitRepository,
@@ -26,6 +25,7 @@ class DetailFeedService(
     private val userUtil: UserUtil,
     private val feedUtil: FeedUtil
 ) {
+    @Transactional
     fun execute(feedId: Long): ResponseEntity<DetailFeedResponseDto> {
         val feed = feedUtil.fetchFeedById(feedId)
         val hit = hitRepository.findById(feedId).orElseGet { Hit(feedId, 0) }

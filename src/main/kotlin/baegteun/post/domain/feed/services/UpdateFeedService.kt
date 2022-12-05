@@ -12,13 +12,13 @@ import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.util.Objects
 
-@Transactional
 @Service
 class UpdateFeedService(
     private val feedUtil: FeedUtil,
     private val userUtil: UserUtil,
     private val tagRepository: TagRepository
 ) {
+    @Transactional
     fun execute(feedId: Long, req: UpdateFeedRequestDto): ResponseEntity<Void> {
         val feed = feedUtil.fetchFeedById(feedId)
 

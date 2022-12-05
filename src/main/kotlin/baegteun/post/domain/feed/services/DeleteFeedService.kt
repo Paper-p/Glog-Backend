@@ -23,6 +23,7 @@ class DeleteFeedService(
     private val heartRepository: HeartRepository,
     private val tagRepository: TagRepository
 ) {
+    @Transactional
     fun execute(feedId: Long): ResponseEntity<Void> {
         val feed = feedUtil.fetchFeedById(feedId)
 

@@ -8,11 +8,11 @@ import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import org.springframework.web.multipart.MultipartFile
 
-@Transactional
 @Service
 class UploadImageService(
     private val imageUtil: ImageUtil
 ) {
+    @Transactional
     fun execute(image: MultipartFile): ResponseEntity<UploadImageResponseDto> {
         val imageUrl = imageUtil.uploadImage(image = image)
         val response = UploadImageResponseDto(imageUrl)

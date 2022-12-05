@@ -11,13 +11,13 @@ import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
-@Transactional
 @Service
 class SignupService(
     private val userUtil: UserUtil,
     private val passwordEncoder: PasswordEncoder,
     private val userRepository: UserRepository
 ) {
+    @Transactional
     fun execute(signupRequestDto: SignupRequestDto): ResponseEntity<Void> {
         userUtil.checkExistsUserId(signupRequestDto.userId)
         userUtil.checkExistsNickname(signupRequestDto.nickname)

@@ -4,6 +4,7 @@ import baegteun.post.domain.feed.domain.entity.Feed
 import baegteun.post.global.entity.BaseIdEntity
 import baegteun.post.infrastructure.image.DefaultImage
 import org.hibernate.annotations.ColumnDefault
+import java.io.Serializable
 import javax.persistence.*
 import javax.validation.constraints.NotNull
 import javax.validation.constraints.Size
@@ -31,4 +32,8 @@ class User(
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = [CascadeType.REMOVE])
     var feeds: List<Feed> = listOf()
-): BaseIdEntity()
+): BaseIdEntity(), Serializable {
+    fun updateProfile(url: String) {
+        this.profileImageUrl = url
+    }
+}

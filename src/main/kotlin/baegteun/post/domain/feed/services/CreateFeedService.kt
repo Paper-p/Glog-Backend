@@ -13,7 +13,6 @@ import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
-@Transactional
 @Service
 class CreateFeedService(
     private val feedRepository: FeedRepository,
@@ -21,6 +20,7 @@ class CreateFeedService(
     private val tagRepository: TagRepository,
     private val userUtil: UserUtil
 ) {
+    @Transactional
     fun execute(req: CreateFeedRequestDto): ResponseEntity<Void> {
         val user = userUtil.fetchCurrentUser()
         val feed = if (req.thumbnail.isNullOrEmpty()) {

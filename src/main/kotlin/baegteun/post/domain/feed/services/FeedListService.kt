@@ -12,12 +12,12 @@ import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
-@Transactional(readOnly = true)
 @Service
 class FeedListService(
     private val feedRepository: FeedRepository,
     private val feedUtil: FeedUtil
 ) {
+    @Transactional(readOnly = true)
     fun execute(pageable: Pageable, keyword: String?): ResponseEntity<FeedListResponseDto> {
         val paging: PageRequest = PageRequest.of(pageable.pageNumber, pageable.pageSize, Sort.by(Sort.Order.desc("createdAt")))
         val list: List<Feed> = if (keyword == null) {

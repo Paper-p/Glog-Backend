@@ -14,13 +14,13 @@ import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.util.Objects
 
-@Transactional
 @Service
 class TokenRefreshService(
     private val userUtil: UserUtil,
     private val jwtTokenProvider: JwtTokenProvider,
     private val refreshTokenRepository: RefreshTokenRepository,
 ) {
+    @Transactional
     fun execute(refreshToken: String): ResponseEntity<TokenRefreshResponseDto> {
         val userId = jwtTokenProvider.exactUserIdFromRefreshToken(refreshToken)
         if (!userUtil.existsByUserId(userId))

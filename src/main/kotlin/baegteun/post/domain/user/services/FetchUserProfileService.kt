@@ -11,13 +11,13 @@ import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.util.Objects
 
-@Transactional(readOnly = true)
 @Service
 class FetchUserProfileService(
     private val userUtil: UserUtil,
     private val feedUtil: FeedUtil,
     private val userRepository: UserRepository
 ) {
+    @Transactional(readOnly = true)
     fun execute(nickname: String): ResponseEntity<UserProfileResponseDto> {
         val user = userRepository.findByNickname(nickname) ?: throw UserNotFoundException()
         val isMine: Boolean = try {
