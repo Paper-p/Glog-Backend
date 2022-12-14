@@ -4,6 +4,7 @@ import baegteun.post.domain.feed.presentation.dto.request.CreateFeedRequestDto
 import baegteun.post.domain.feed.presentation.dto.request.UpdateFeedRequestDto
 import baegteun.post.domain.feed.presentation.dto.response.DetailFeedResponseDto
 import baegteun.post.domain.feed.presentation.dto.response.FeedListResponseDto
+import baegteun.post.domain.feed.presentation.dto.response.LikedFeedListResponseDto
 import baegteun.post.domain.feed.services.*
 import org.springframework.data.domain.Pageable
 import org.springframework.data.web.PageableDefault
@@ -30,7 +31,8 @@ class FeedController(
     private val updateFeedService: UpdateFeedService,
     private val deleteFeedService: DeleteFeedService,
     private val likeFeedService: LikeFeedService,
-    private val revokeLikeFeedService: RevokeLikeFeedService
+    private val revokeLikeFeedService: RevokeLikeFeedService,
+    private val likedFeedListService: LikedFeedListService
 ) {
     @GetMapping("list")
     fun feedList(
@@ -57,6 +59,10 @@ class FeedController(
     @DeleteMapping("{id}")
     fun deleteFeed(@NotBlank @PathVariable("id") id: Long): ResponseEntity<Void> =
         deleteFeedService.execute(id)
+
+    @GetMapping("like")
+    fun likedFeedList(): ResponseEntity<LikedFeedListResponseDto> =
+        likedFeedListService.execute()
 
     @PostMapping("like/{id}")
     fun likeFeed(@NotBlank @PathVariable("id") id: Long): ResponseEntity<Void> =

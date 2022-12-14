@@ -9,4 +9,5 @@ interface HeartRepository: CrudRepository<Heart, Long> {
     fun countByFeed(feed: Feed): Int
     fun existsByUserAndFeed(user: User, feed: Feed): Boolean
     fun findByUserAndFeed(user: User, feed: Feed): Heart?
+    fun findAllByUser(user: User): List<Heart>
 }

@@ -12,7 +12,6 @@ import org.springframework.web.multipart.MultipartFile
 class UploadImageService(
     private val imageUtil: ImageUtil
 ) {
-    @Transactional
     fun execute(image: MultipartFile): ResponseEntity<UploadImageResponseDto> {
         val imageUrl = imageUtil.uploadImage(image = image)
         val response = UploadImageResponseDto(imageUrl)

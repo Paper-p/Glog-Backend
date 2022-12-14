@@ -26,8 +26,7 @@ class User(
     var password: String,
 
     @field:NotNull
-    @field:Size(max = 100)
-    @ColumnDefault("'${DefaultImage.PROFILE_IMAGE}'")
+    @Column(columnDefinition = "TEXT")
     var profileImageUrl: String,
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = [CascadeType.REMOVE])

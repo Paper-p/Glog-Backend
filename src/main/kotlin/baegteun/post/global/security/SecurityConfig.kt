@@ -68,7 +68,8 @@ class SecurityConfig(
             // user
             .antMatchers(HttpMethod.GET, "/user/my").authenticated()
             .antMatchers(HttpMethod.GET, "/user/profile").authenticated()
-            .antMatchers(HttpMethod.PUT, "/user").authenticated()
+            .antMatchers(HttpMethod.PATCH, "/user/profile-image").authenticated()
+            .antMatchers(HttpMethod.PATCH, "/user/nickname").authenticated()
             .antMatchers(HttpMethod.GET, "/user/{nickname}").permitAll()
 
             .anyRequest().denyAll()
