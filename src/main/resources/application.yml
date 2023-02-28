@@ -4,7 +4,6 @@ spring:
       max-file-size: 5MB
       max-request-size: 5MB
   jpa:
-    database: ${DB}
     database-platform: ${DB_PLATFORM}
     show-sql: true
     hibernate:
