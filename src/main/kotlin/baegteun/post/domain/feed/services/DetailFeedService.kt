@@ -40,7 +40,7 @@ class DetailFeedService(
         val likeCount = heartRepository.countByFeed(feed)
         val isLiked = if(user != null) heartRepository.existsByUserAndFeed(user, feed) else false
         val tagList = tagRepository.findAllByFeed(feed).map { it.title }
-        val comments = commentRepository.findAllByFeed(feed).map { SingleCommentDto(it,if(user != null) Objects.equals(it.createdBy.id, user.id) else false ) }
+        val comments = commentRepository.findAllByFeedOrderByCreatedAtDesc(feed).map { SingleCommentDto(it,if(user != null) Objects.equals(it.createdBy.id, user.id) else false ) }
         val isMine = if(user != null) Objects.equals(feed.user.id, user.id) else false
 
         val response = DetailFeedResponseDto(

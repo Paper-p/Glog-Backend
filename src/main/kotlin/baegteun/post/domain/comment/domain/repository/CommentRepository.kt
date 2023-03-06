@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository
 
 interface CommentRepository: JpaRepository<Comment, Long> {
     fun countByFeed(feed: Feed): Int
-    fun findAllByFeed(feed: Feed): List<Comment>
+    fun findAllByFeedOrderByCreatedAtDesc(feed: Feed): List<Comment>
 }
