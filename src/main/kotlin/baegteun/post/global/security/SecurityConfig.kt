@@ -70,6 +70,7 @@ class SecurityConfig(
             .antMatchers(HttpMethod.GET, "/user/profile").authenticated()
             .antMatchers(HttpMethod.PATCH, "/user/profile-image").authenticated()
             .antMatchers(HttpMethod.PATCH, "/user/nickname").authenticated()
+            .antMatchers(HttpMethod.PATCH, "/user/introduce").authenticated()
             .antMatchers(HttpMethod.GET, "/user/{nickname}").permitAll()
 
             .anyRequest().denyAll()

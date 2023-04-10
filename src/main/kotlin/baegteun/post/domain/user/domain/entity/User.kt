@@ -21,6 +21,10 @@ class User(
     @field:Size(max = 20)
     var nickname: String,
 
+    @Column(nullable = true)
+    @field:Size(max = 100)
+    var introduce: String?,
+
     @field:NotNull
     @field:Size(max = 60)
     var password: String,

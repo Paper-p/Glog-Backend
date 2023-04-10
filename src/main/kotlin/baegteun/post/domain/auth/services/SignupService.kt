@@ -26,6 +26,7 @@ class SignupService(
             userId = signupRequestDto.userId,
             nickname = signupRequestDto.nickname,
             password = passwordEncoder.encode(signupRequestDto.password),
+            introduce = signupRequestDto.introduce,
             profileImageUrl = DefaultImage.PROFILE_IMAGE
         )
         userRepository.save(user)
